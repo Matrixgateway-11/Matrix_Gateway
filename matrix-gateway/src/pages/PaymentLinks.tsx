@@ -17,7 +17,7 @@ export default function PaymentLinks() {
       <section className="bg-[#040E2B] py-20 relative overflow-hidden">
         <div className="container-wide relative">
           <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 text-[#60A5FA] text-xs font-bold uppercase tracking-[0.14em] mb-5">Payment Links</span>
+            <span className="inline-flex items-center gap-2 text-[#60A5FA] text-xs font-bold uppercase tracking-[0.14em] mb-5"><span className="w-2 h-2 bg-[#60A5FA] rounded-full" />Payment Links</span>
             <h1 className="text-[2.6rem] sm:text-5xl font-extrabold text-white mb-5 leading-[1.1] tracking-[-0.04em]">
               Collect Payments<br />
               <span className="bg-gradient-to-r from-[#60A5FA] to-[#93C5FD] bg-clip-text text-transparent">
@@ -59,8 +59,8 @@ export default function PaymentLinks() {
         <div className="container-wide">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <ScrollReveal direction="left">
-              <span className="inline-flex items-center gap-2 text-[#1A56DB] text-xs font-bold uppercase tracking-[0.12em] mb-4">Features</span>
-              <h2 className="text-3xl sm:text-4xl font-bold text-[#0F1E5C] mb-4">Everything You Need, Nothing You Don't</h2>
+              <span className="inline-flex items-center gap-2 text-[#1A56DB] text-xs font-bold uppercase tracking-[0.12em] mb-4"><span className="w-2 h-2 bg-[#1A56DB] rounded-full" />Features</span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F1E5C] tracking-[-0.04em] mb-4">Everything You Need, Nothing You Don't</h2>
               <p className="text-slate-500 mb-6 leading-relaxed">Payment Links are designed for simplicity. Set them up fast and track them easily.</p>
               <div className="space-y-4">
                 {[

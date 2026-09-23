@@ -28,7 +28,7 @@ export default function PaymentGateway() {
           style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
         <div className="container-wide relative">
           <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 text-[#60A5FA] text-xs font-bold uppercase tracking-[0.14em] mb-5">Payment Gateway</span>
+            <span className="inline-flex items-center gap-2 text-[#60A5FA] text-xs font-bold uppercase tracking-[0.14em] mb-5"><span className="w-2 h-2 bg-[#60A5FA] rounded-full" />Payment Gateway</span>
             <h1 className="text-[2.6rem] sm:text-5xl lg:text-6xl font-extrabold text-white mb-5 leading-[1.1] tracking-[-0.04em]">
               Accept Payments<br />
               <span className="bg-gradient-to-r from-[#60A5FA] to-[#93C5FD] bg-clip-text text-transparent">
@@ -91,8 +91,8 @@ export default function PaymentGateway() {
         <div className="container-wide">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <ScrollReveal direction="left">
-              <span className="inline-flex items-center gap-2 text-[#1A56DB] text-xs font-bold uppercase tracking-[0.12em] mb-4">Dashboard</span>
-              <h2 className="text-3xl sm:text-4xl font-bold text-[#0F1E5C] mb-4">Track Every Rupee in Real Time</h2>
+              <span className="inline-flex items-center gap-2 text-[#1A56DB] text-xs font-bold uppercase tracking-[0.12em] mb-4"><span className="w-2 h-2 bg-[#1A56DB] rounded-full" />Dashboard</span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F1E5C] tracking-[-0.04em] mb-4">Track Every Rupee in Real Time</h2>
               <p className="text-slate-500 leading-relaxed mb-6">Your payment dashboard gives you a live view of transactions, settlements, refunds, and revenue trends — all in one place.</p>
               <ul className="space-y-3">
                 {['Live transaction monitoring', 'Detailed payment analytics', 'Settlement tracking', 'One-click refunds', 'Custom date range reports', 'Export to CSV/Excel'].map((item) => (

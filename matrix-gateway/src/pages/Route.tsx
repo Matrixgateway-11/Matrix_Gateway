@@ -11,7 +11,7 @@ export default function RoutePage() {
       <section className="bg-[#040E2B] py-20">
         <div className="container-wide">
           <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 text-[#60A5FA] text-xs font-bold uppercase tracking-[0.14em] mb-5">Route</span>
+            <span className="inline-flex items-center gap-2 text-[#60A5FA] text-xs font-bold uppercase tracking-[0.14em] mb-5"><span className="w-2 h-2 bg-[#60A5FA] rounded-full" />Route</span>
             <h1 className="text-[2.6rem] sm:text-5xl font-extrabold text-white mb-5 leading-[1.1] tracking-[-0.04em]">
               Route Payments to<br />
               <span className="bg-gradient-to-r from-[#60A5FA] to-[#93C5FD] bg-clip-text text-transparent">
@@ -96,7 +96,7 @@ export default function RoutePage() {
       <section className="section-padding bg-slate-50">
         <div className="container-wide">
           <SectionHeader label="Features" title="Powerful Routing Capabilities" />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-12">
             {[
               { icon: GitBranch, title: 'Rule-Based Splitting', description: 'Define rules for how incoming payments are distributed across recipients.' },
               { icon: Zap, title: 'Instant Distribution', description: 'Funds are split and routed in real time, no manual intervention needed.' },

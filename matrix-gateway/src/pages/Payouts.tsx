@@ -19,7 +19,7 @@ export default function Payouts() {
       <section className="bg-[#040E2B] py-20">
         <div className="container-wide">
           <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 text-[#60A5FA] text-xs font-bold uppercase tracking-[0.14em] mb-5">Payouts</span>
+            <span className="inline-flex items-center gap-2 text-[#60A5FA] text-xs font-bold uppercase tracking-[0.14em] mb-5"><span className="w-2 h-2 bg-[#60A5FA] rounded-full" />Payouts</span>
             <h1 className="text-[2.6rem] sm:text-5xl font-extrabold text-white mb-5 leading-[1.1] tracking-[-0.04em]">
               Disburse Funds<br />
               <span className="bg-gradient-to-r from-[#60A5FA] to-[#93C5FD] bg-clip-text text-transparent">
@@ -80,7 +80,7 @@ export default function Payouts() {
         <div className="container-wide">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <ScrollReveal direction="left">
-              <h2 className="text-3xl font-bold text-[#0F1E5C] mb-4">Flexible Transfer Modes</h2>
+              <h2 className="text-3xl font-extrabold text-[#0F1E5C] tracking-[-0.04em] mb-4">Flexible Transfer Modes</h2>
               <p className="text-slate-500 mb-6">Send payouts through whichever channel works best for your recipients.</p>
               <div className="space-y-3">
                 {modes.map((m) => (

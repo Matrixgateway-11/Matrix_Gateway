@@ -21,7 +21,7 @@ export default function SectionHeader({ label, title, subtitle, center = true, l
       {label && (
         <div className={`inline-flex items-center gap-2 mb-4
           ${light ? 'text-blue-300' : 'text-[#1A56DB]'}`}>
-          <span className={`w-5 h-0.5 rounded-full ${light ? 'bg-blue-300' : 'bg-[#1A56DB]'}`} />
+          <span className={`w-2 h-2 rounded-full ${light ? 'bg-blue-300' : 'bg-[#1A56DB]'}`} />
           <span className="text-xs font-bold uppercase tracking-[0.12em]">{label}</span>
         </div>
       )}

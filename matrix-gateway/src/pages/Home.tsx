@@ -1,4 +1,5 @@
-﻿import { motion } from 'framer-motion'
+﻿import { useState, useEffect, useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
 import {
   ArrowRight, CheckCircle2, CreditCard, Link2, LayoutTemplate,
   ArrowRightLeft, Wallet, RefreshCw, GitBranch, FileText, Smartphone,
@@ -7,7 +8,6 @@ import {
 import { Link } from 'react-router-dom'
 import ScrollReveal from '../components/ScrollReveal'
 import CTASection from '../components/CTASection'
-import DashboardPreview from '../components/DashboardPreview'
 
 /* ─── service cards data ─────────────────────────────── */
 const serviceCards = [
@@ -29,17 +29,67 @@ const paymentModes = [
   { img: '/images/bank-transfer.png',    label: 'Bank Transfer',    desc: 'NEFT / RTGS / IMPS transfers' },
 ]
 
-/* ─── animated counter ──────────────────────────────── */
+/* ─── animated count-up counter ───────────────────────
+   Parses "2,000+" → prefix "", number 2000, suffix "+".
+   On scroll into view: spins through random values quickly,
+   then decelerates and settles on the final number.        */
 function StatBadge({ value, label }: { value: string; label: string }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const inView = useInView(ref, { once: true, margin: '-60px' })
+
+  // parse the target string
+  const match = value.match(/^([^\d]*)([\d,]+)(.*)$/)
+  const prefix = match?.[1] ?? ''
+  const target = match ? parseInt(match[2].replace(/,/g, ''), 10) : 0
+  const suffix = match?.[3] ?? ''
+
+  const [display, setDisplay] = useState(0)
+
+  useEffect(() => {
+    if (!inView) return
+
+    let raf = 0
+    const spinDuration = 550   // fast random spin phase (ms)
+    const countDuration = 1400 // settle count-up phase (ms)
+    const start = performance.now()
+
+    // easeOutExpo — fast then smooth deceleration
+    const easeOut = (t: number) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t))
+
+    const tick = (now: number) => {
+      const elapsed = now - start
+
+      if (elapsed < spinDuration) {
+        // random spin — numbers change rapidly
+        setDisplay(Math.floor(Math.random() * target))
+        raf = requestAnimationFrame(tick)
+      } else if (elapsed < spinDuration + countDuration) {
+        // smooth decelerating count-up to the target
+        const p = (elapsed - spinDuration) / countDuration
+        setDisplay(Math.floor(easeOut(p) * target))
+        raf = requestAnimationFrame(tick)
+      } else {
+        // land exactly on the target
+        setDisplay(target)
+      }
+    }
+
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [inView, target])
+
   return (
     <motion.div
+      ref={ref}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
       className="text-center"
     >
-      <p className="text-5xl sm:text-6xl font-black text-slate-300 tracking-[-0.05em] leading-none">{value}</p>
+      <p className="text-5xl sm:text-6xl font-black text-slate-300 tracking-[-0.05em] leading-none tabular-nums">
+        {prefix}{display.toLocaleString('en-IN')}{suffix}
+      </p>
       <p className="text-xs font-bold text-slate-500 uppercase tracking-[0.12em] mt-2">{label}</p>
     </motion.div>
   )
@@ -51,20 +101,19 @@ export default function Home() {
       {/* ══════════════════════════════════════
           HERO
       ══════════════════════════════════════ */}
-      <section className="relative bg-[#F0F4FF] overflow-hidden min-h-[88vh] flex items-center">
-        {/* soft bg blobs */}
-        <div className="absolute top-0 right-0 w-[55%] h-full bg-[#1A56DB] clip-hero pointer-events-none" />
-        <div className="absolute top-0 right-0 w-[55%] h-full"
-          style={{ background: 'linear-gradient(135deg, #1A56DB 0%, #0F1E5C 100%)', clipPath: 'polygon(12% 0%, 100% 0%, 100% 100%, 0% 100%)' }} />
+      <section className="relative bg-[#F0F4FF] overflow-hidden">
+        {/* Right blue panel — desktop only, stays strictly in right column so text never overlaps */}
+        <div className="hidden lg:block absolute top-0 right-0 w-[42%] h-full pointer-events-none"
+          style={{ background: 'linear-gradient(135deg, #1A56DB 0%, #0F1E5C 100%)', clipPath: 'polygon(18% 0%, 100% 0%, 100% 100%, 0% 100%)' }} />
 
-        <div className="container-wide relative z-10 py-20 lg:py-28">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="container-wide relative z-10 py-16 lg:py-0 lg:min-h-[88vh] flex items-center">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-8 items-center w-full">
 
-            {/* Left */}
-            <div className="max-w-xl">
+            {/* Left — text (always on light bg → perfect contrast) */}
+            <div className="max-w-xl lg:py-24">
               <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
                 <div className="inline-flex items-center gap-2 mb-5">
-                  <span className="w-4 h-0.5 bg-[#1A56DB] rounded-full" />
+                  <span className="w-2 h-2 bg-[#1A56DB] rounded-full" />
                   <span className="text-[#1A56DB] text-xs font-bold uppercase tracking-[0.14em]">Feel The Convenience</span>
                 </div>
               </motion.div>
@@ -113,9 +162,28 @@ export default function Home() {
               </motion.div>
             </div>
 
-            {/* Right — dashboard float */}
-            <div className="flex justify-center lg:justify-end">
-              <DashboardPreview />
+            {/* Right — person image */}
+            <div className="relative flex justify-center items-end lg:h-full lg:self-stretch">
+              {/* mobile/tablet blue backdrop card */}
+              <div className="lg:hidden absolute inset-x-4 bottom-0 top-8 rounded-3xl"
+                style={{ background: 'linear-gradient(135deg, #1A56DB 0%, #0F1E5C 100%)' }} />
+
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.25, ease: 'easeOut' }}
+                className="relative z-10 flex items-end lg:h-full"
+              >
+                {/* soft glow behind person for depth */}
+                <div className="absolute left-1/2 -translate-x-1/2 bottom-10 w-64 h-64 bg-[#60A5FA]/25 rounded-full blur-3xl pointer-events-none" />
+                <img
+                  src="/images/hero-person.png"
+                  alt="Person making a secure payment with card and phone"
+                  width={434}
+                  height={574}
+                  className="relative w-auto h-[420px] sm:h-[480px] lg:h-[560px] max-w-full object-contain object-bottom drop-shadow-2xl"
+                />
+              </motion.div>
             </div>
           </div>
         </div>
@@ -124,7 +192,7 @@ export default function Home() {
       {/* ══════════════════════════════════════
           SERVICES INTRO SPLIT
       ══════════════════════════════════════ */}
-      <section className="py-16 bg-white">
+      <section className="section-padding bg-white">
         <div className="container-wide">
           <div className="grid md:grid-cols-2 gap-6">
 
@@ -193,9 +261,9 @@ export default function Home() {
           <ScrollReveal>
             <div className="text-center mb-12">
               <div className="inline-flex items-center gap-2 mb-4">
-                <span className="w-4 h-0.5 bg-[#1A56DB] rounded-full" />
+                <span className="w-2 h-2 bg-[#1A56DB] rounded-full" />
                 <span className="text-[#1A56DB] text-xs font-bold uppercase tracking-[0.14em]">Our Services</span>
-                <span className="w-4 h-0.5 bg-[#1A56DB] rounded-full" />
+                <span className="w-2 h-2 bg-[#1A56DB] rounded-full" />
               </div>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F1E5C] tracking-[-0.04em] uppercase">
                 Our Best Features For<br />Your Convenience
@@ -203,7 +271,8 @@ export default function Home() {
             </div>
           </ScrollReveal>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {/* extra top padding (pt-10) leaves room for the overhanging icon badges */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-14 pt-10">
             {serviceCards.map((svc, i) => {
               const Icon = svc.icon
               return (
@@ -213,18 +282,31 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-20px' }}
                   transition={{ duration: 0.4, delay: i * 0.06 }}
+                  className="relative"
                 >
                   <Link to={svc.href}
-                    className="group flex flex-col bg-white rounded-2xl p-6 border border-slate-100
-                               shadow-[0_2px_12px_rgba(0,0,0,0.05)] hover:shadow-[0_6px_30px_rgba(26,86,219,0.1)]
-                               hover:-translate-y-1 transition-all duration-300 h-full">
-                    {/* Icon circle */}
-                    <div className="w-14 h-14 bg-[#EFF6FF] rounded-full flex items-center justify-center mb-5
-                                    group-hover:bg-[#1A56DB] transition-colors duration-300">
-                      <Icon className="w-6 h-6 text-[#1A56DB] group-hover:text-white transition-colors duration-300" strokeWidth={1.8} />
+                    className="group relative flex flex-col bg-white rounded-2xl pt-12 px-7 pb-8 border border-slate-100
+                               shadow-[0_4px_20px_rgba(15,30,92,0.06)] hover:shadow-[0_12px_40px_rgba(26,86,219,0.14)]
+                               hover:-translate-y-1.5 transition-all duration-300 h-full">
+
+                    {/* Floating overlapping icon badge — sits half above the card's top edge */}
+                    <div className="absolute -top-7 left-7 w-14 h-14 rounded-2xl
+                                    bg-gradient-to-br from-[#1A56DB] to-[#0F1E5C]
+                                    flex items-center justify-center
+                                    shadow-[0_8px_20px_rgba(26,86,219,0.35)]
+                                    group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300">
+                      <Icon className="w-6 h-6 text-white" strokeWidth={1.9} />
                     </div>
+
                     <h3 className="text-base font-bold text-[#0F1E5C] mb-2 tracking-[-0.02em]">{svc.title}</h3>
                     <p className="text-sm text-slate-500 leading-relaxed flex-1">{svc.desc}</p>
+
+                    {/* subtle learn-more affordance on hover */}
+                    <span className="mt-4 inline-flex items-center gap-1.5 text-[#1A56DB] text-sm font-semibold
+                                     opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                      Learn more
+                      <ArrowRight className="w-3.5 h-3.5" strokeWidth={2.5} />
+                    </span>
                   </Link>
                 </motion.div>
               )
@@ -321,7 +403,7 @@ export default function Home() {
       {/* ══════════════════════════════════════
           SUCCESS STORY BANNER
       ══════════════════════════════════════ */}
-      <section className="py-16 sm:py-20 bg-[#1A56DB] relative overflow-hidden">
+      <section className="section-padding bg-[#1A56DB] relative overflow-hidden">
         <div className="absolute inset-0"
           style={{
             backgroundImage: 'linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)',
@@ -332,9 +414,9 @@ export default function Home() {
         <div className="container-wide relative z-10 text-center">
           <ScrollReveal>
             <div className="inline-flex items-center gap-2 mb-5">
-              <span className="w-4 h-0.5 bg-white/50 rounded-full" />
+              <span className="w-2 h-2 bg-white/50 rounded-full" />
               <span className="text-white/70 text-xs font-bold uppercase tracking-[0.14em]">Our Story</span>
-              <span className="w-4 h-0.5 bg-white/50 rounded-full" />
+              <span className="w-2 h-2 bg-white/50 rounded-full" />
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-[-0.04em] leading-tight mb-6 max-w-3xl mx-auto">
               Matrix Gateway — India's Modern Payment Infrastructure
@@ -385,9 +467,9 @@ export default function Home() {
           <ScrollReveal>
             <div className="text-center mb-12">
               <div className="inline-flex items-center gap-2 mb-4">
-                <span className="w-4 h-0.5 bg-[#1A56DB] rounded-full" />
+                <span className="w-2 h-2 bg-[#1A56DB] rounded-full" />
                 <span className="text-[#1A56DB] text-xs font-bold uppercase tracking-[0.14em]">Why Choose Us</span>
-                <span className="w-4 h-0.5 bg-[#1A56DB] rounded-full" />
+                <span className="w-2 h-2 bg-[#1A56DB] rounded-full" />
               </div>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F1E5C] tracking-[-0.04em]">
                 Built for Every Business

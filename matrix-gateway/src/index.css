@@ -74,7 +74,7 @@
 
   .section-label::before {
     content: '';
-    @apply w-5 h-0.5 bg-[#1A56DB] inline-block rounded-full;
+    @apply w-2 h-2 bg-[#1A56DB] inline-block rounded-full;
   }
 
   .gradient-text {

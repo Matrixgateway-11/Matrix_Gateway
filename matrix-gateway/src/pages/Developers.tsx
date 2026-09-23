@@ -1,209 +1,283 @@
-﻿import { Code2, Webhook, BookOpen, Shield, Zap, Terminal, ArrowRight, CheckCircle2 } from 'lucide-react'
+﻿import { motion } from 'framer-motion'
+import { ArrowRight, Download, FileText, Code2, Smartphone, Building2, CheckCircle2 } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import SectionHeader from '../components/SectionHeader'
 import CTASection from '../components/CTASection'
 import ScrollReveal from '../components/ScrollReveal'
 
-const sdks = ['Node.js', 'Python', 'PHP', 'Java', 'Ruby', 'Go', '.NET', 'React Native']
+const serverUtils = [
+  { name: 'PHP', file: 'php.png', desc: 'Server-side SDK for PHP applications' },
+  { name: 'Java', file: 'java.jpg', desc: 'Robust SDK for Java backends' },
+  { name: 'Node.js', file: 'nodejs.png', desc: 'Modern SDK for Node.js runtimes' },
+  { name: 'ASP.NET', file: 'dotnet.png', desc: 'SDK for .NET web applications' },
+  { name: 'Python', file: 'python.jpg', desc: 'Pythonic SDK for quick integration' },
+  { name: 'WooCommerce', file: 'woocommerce.png', desc: 'Plugin for WooCommerce stores' },
+]
+
+/* ── Integration Flow hero visual ── */
+function IntegrationFlow() {
+  const nodes = [
+    { icon: Code2, label: 'Your App', sub: 'API request' },
+    { icon: Building2, label: 'Matrix API', sub: 'Processing' },
+    { icon: Smartphone, label: 'Bank / UPI', sub: 'Authorising' },
+    { icon: CheckCircle2, label: 'Success', sub: 'Confirmed' },
+  ]
+
+  return (
+    <div className="relative w-full max-w-md mx-auto">
+      {/* card wrapper */}
+      <motion.div
+        initial={{ opacity: 0, y: 24, scale: 0.97 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="bg-white rounded-2xl border border-slate-100 shadow-[0_20px_60px_rgba(26,86,219,0.15)] p-6 sm:p-8"
+      >
+        {/* header */}
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="text-xs font-bold text-[#0F1E5C]">API Status: Operational</span>
+          </div>
+          <span className="text-[10px] font-mono bg-[#EFF6FF] text-[#1A56DB] px-2 py-1 rounded-md font-semibold">POST /v1/payments</span>
+        </div>
+
+        {/* flow nodes */}
+        <div className="space-y-3">
+          {nodes.map((n, i) => {
+            const Icon = n.icon
+            return (
+              <motion.div
+                key={n.label}
+                initial={{ opacity: 0, x: -12 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4, delay: 0.5 + i * 0.15 }}
+                className="relative"
+              >
+                <div className="flex items-center gap-3">
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0
+                    ${i === 3 ? 'bg-emerald-500' : 'bg-gradient-to-br from-[#1A56DB] to-[#0F1E5C]'}`}>
+                    <Icon className="w-5 h-5 text-white" strokeWidth={1.8} />
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-sm font-bold text-[#0F1E5C] tracking-[-0.02em]">{n.label}</p>
+                    <p className="text-xs text-slate-400">{n.sub}</p>
+                  </div>
+                  {i < 3 && (
+                    <motion.span
+                      animate={{ opacity: [0.3, 1, 0.3] }}
+                      transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.3 }}
+                      className="text-[#1A56DB] text-xs font-bold"
+                    >
+                      ▼
+                    </motion.span>
+                  )}
+                </div>
+                {/* connecting line */}
+                {i < 3 && <div className="absolute left-5 top-10 w-px h-3 bg-[#1A56DB]/20" />}
+              </motion.div>
+            )
+          })}
+        </div>
+
+        {/* footer chips */}
+        <div className="mt-6 pt-5 border-t border-slate-100 flex items-center gap-2 flex-wrap">
+          <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Avg</span>
+          <span className="text-xs font-bold text-[#0F1E5C]">142ms</span>
+          <span className="w-px h-3 bg-slate-200" />
+          <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Success</span>
+          <span className="text-xs font-bold text-emerald-600">99.9%</span>
+          <span className="w-px h-3 bg-slate-200" />
+          <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Uptime</span>
+          <span className="text-xs font-bold text-[#1A56DB]">99.99%</span>
+        </div>
+      </motion.div>
+
+      {/* floating badge */}
+      <motion.div
+        animate={{ y: [-6, 6, -6] }}
+        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute -top-4 -right-3 bg-[#0F1E5C] text-white text-xs font-bold px-3 py-2 rounded-xl shadow-lg hidden sm:block"
+      >
+        200 OK
+      </motion.div>
+    </div>
+  )
+}
 
 export default function Developers() {
   return (
     <>
-      <section className="bg-[#040E2B] py-20">
-        <div className="container-wide">
-          <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 text-[#60A5FA] text-xs font-bold uppercase tracking-[0.14em] mb-5">Developer Portal</span>
-            <h1 className="text-[2.6rem] sm:text-5xl font-extrabold text-white mb-5 leading-[1.1] tracking-[-0.04em]">
-              Payments Built for<br />
-              <span className="bg-gradient-to-r from-[#60A5FA] to-[#93C5FD] bg-clip-text text-transparent">
-                Developers
-              </span>
-            </h1>
-            <p className="text-lg text-blue-100/80 mb-8 max-w-xl leading-relaxed">
-              Clean REST APIs, comprehensive documentation, SDKs for your stack, and webhooks for every event. 
-              Integrate Matrix Gateway in less than a day.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link to="/signup" className="inline-flex items-center gap-2 bg-[#1A56DB] text-white font-bold text-sm px-6 py-3 rounded-lg hover:bg-[#1648C8] transition-colors shadow-lg active:scale-[0.98]">
-                Start Building <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link to="#api-reference" className="inline-flex items-center gap-2 text-white font-semibold px-8 py-4 rounded-xl border-2 border-white/25 hover:border-white/50 hover:bg-white/10 transition-all">
-                API Reference
-              </Link>
+      {/* ══ HERO ══ */}
+      <section className="relative bg-gradient-to-b from-[#F0F4FF] to-white overflow-hidden">
+        {/* Grid */}
+        <div className="absolute inset-0"
+          style={{
+            backgroundImage: 'linear-gradient(rgba(26,86,219,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(26,86,219,0.04) 1px, transparent 1px)',
+            backgroundSize: '64px 64px'
+          }} />
+        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#1A56DB]/8 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[350px] h-[350px] bg-[#60A5FA]/10 rounded-full blur-[100px] pointer-events-none" />
+
+        <div className="container-wide relative z-10 py-20 lg:py-24">
+          <div className="grid lg:grid-cols-2 gap-14 items-center">
+
+            {/* Left — copy */}
+            <div className="max-w-xl">
+              <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
+                <div className="inline-flex items-center gap-2 mb-5">
+                  <span className="w-2 h-2 bg-[#1A56DB] rounded-full" />
+                  <span className="text-[#1A56DB] text-xs font-bold uppercase tracking-[0.14em]">Developer Portal</span>
+                </div>
+              </motion.div>
+
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, delay: 0.08 }}
+                className="text-[2.6rem] sm:text-5xl lg:text-[3.2rem] font-extrabold text-[#0F1E5C] mb-5 leading-[1.1] tracking-[-0.04em]"
+              >
+                Payments Built for<br />
+                <span className="bg-gradient-to-r from-[#1A56DB] to-[#60A5FA] bg-clip-text text-transparent">
+                  Developers
+                </span>
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.16 }}
+                className="text-slate-500 text-base sm:text-lg mb-8 max-w-lg leading-relaxed"
+              >
+                Server-side SDKs for every popular language and comprehensive documentation.
+                Integrate Matrix Gateway into your stack quickly and reliably.
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.24 }}
+                className="flex flex-col sm:flex-row gap-3"
+              >
+                <Link to="/signup"
+                  className="inline-flex items-center justify-center gap-2 bg-[#1A56DB] text-white font-bold text-sm px-7 py-3.5 rounded-xl hover:bg-[#1648C8] transition-colors shadow-lg active:scale-[0.98]">
+                  Start Building <ArrowRight className="w-4 h-4" strokeWidth={2.5} />
+                </Link>
+                <a href="#server-utilities"
+                  className="inline-flex items-center justify-center gap-2 text-[#1A56DB] font-semibold text-sm px-7 py-3.5 rounded-xl border-2 border-[#1A56DB] hover:bg-[#EFF6FF] transition-colors active:scale-[0.98]">
+                  Browse SDKs
+                </a>
+              </motion.div>
+            </div>
+
+            {/* Right — integration flow visual */}
+            <div className="hidden lg:block">
+              <IntegrationFlow />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Integration steps */}
-      <section className="section-padding bg-white">
+      {/* ══ SERVER SIDE UTILITIES ══ */}
+      <section id="server-utilities" className="section-padding bg-slate-50 scroll-mt-16">
         <div className="container-wide">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <ScrollReveal direction="left">
-              <SectionHeader label="Quick Start" title="From Zero to Payments in Under a Day" center={false} />
-              <p className="text-slate-500 mt-4 mb-6 leading-relaxed">
-                Our integration process is designed to minimize the time between signing up and processing your first live transaction.
+          <ScrollReveal>
+            <div className="mb-3">
+              <div className="inline-flex items-center gap-2 mb-4">
+                <span className="w-2 h-2 bg-[#1A56DB] rounded-full" />
+                <span className="text-[#1A56DB] text-xs font-bold uppercase tracking-[0.14em]">Server Side Utilities for Web</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F1E5C] tracking-[-0.04em] mb-3">
+                SDKs for Your Favourite Language
+              </h2>
+              <p className="text-slate-500 text-sm sm:text-base max-w-2xl leading-relaxed">
+                Want an API or package for your favourite development language? Let us know and we'll see if
+                we can make it happen. Download and integrate in minutes.
               </p>
-              <div className="space-y-4">
-                {[
-                  { step: 1, title: 'Get API Keys', desc: 'Sign up and grab your test API keys from the dashboard immediately.' },
-                  { step: 2, title: 'Install the SDK', desc: 'Install our SDK for your language or use the REST API directly.' },
-                  { step: 3, title: 'Create a Payment', desc: 'A single API call creates a payment and returns a checkout URL.' },
-                  { step: 4, title: 'Handle Webhooks', desc: 'Subscribe to events to get notified when payments succeed or fail.' },
-                ].map(({ step, title, desc }) => (
-                  <div key={step} className="flex gap-4">
-                    <div className="w-8 h-8 bg-[#1A56DB] text-white rounded-full text-sm font-black flex items-center justify-center flex-shrink-0">
-                      {step}
-                    </div>
-                    <div>
-                      <p className="font-bold text-[#0F1E5C] text-sm">{title}</p>
-                      <p className="text-sm text-slate-500 mt-0.5">{desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </ScrollReveal>
+            </div>
+          </ScrollReveal>
 
-            {/* Code panel */}
-            <ScrollReveal direction="right">
-              <div className="bg-slate-900 rounded-2xl overflow-hidden shadow-2xl" id="api-reference">
-                <div className="flex items-center gap-2 px-5 py-3 bg-slate-800 border-b border-white/5">
-                  <div className="w-3 h-3 rounded-full bg-red-500" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                  <div className="w-3 h-3 rounded-full bg-emerald-500" />
-                  <span className="text-xs text-white/30 ml-3 font-mono">Create Payment — Node.js</span>
-                </div>
-                <div className="p-5 font-mono text-sm">
-                  <div className="text-slate-500 text-xs mb-3">// Install: npm install @matrix-gateway/node</div>
-                  <pre className="text-xs text-slate-300 leading-relaxed overflow-x-auto whitespace-pre-wrap">{`const MatrixGateway = require('@matrix-gateway/node');
-
-const mg = new MatrixGateway({
-  apiKey: process.env.MG_API_KEY
-});
-
-const payment = await mg.payments.create({
-  amount: 49900,        // amount in paise
-  currency: 'INR',
-  method: 'upi',
-  customer: {
-    name: 'Customer Name',
-    email: 'customer@example.com',
-    contact: '+91-XXXXX-XXXXX'
-  },
-  callback_url: 'https://yourapp.com/callback',
-  description: 'Order #1234'
-});
-
-console.log(payment.payment_url);
-// https://checkout.matrixgateway.in/pay/...`}</pre>
-                  <div className="mt-4 pt-4 border-t border-white/10">
-                    <div className="text-emerald-400 text-xs mb-1.5">// Response</div>
-                    <pre className="text-xs text-slate-300">{`{
-  "id": "pay_xyz123abc",
-  "status": "created",
-  "amount": 49900,
-  "currency": "INR",
-  "payment_url": "https://checkout.matrixgateway.in/pay/xyz123"
-}`}</pre>
-                  </div>
-                </div>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      {/* Features */}
-      <section className="section-padding bg-slate-50">
-        <div className="container-wide">
-          <SectionHeader label="Developer Features" title="Everything You Need to Build" subtitle="Tools and features designed to make integration as smooth as possible." />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-12">
-            {[
-              { icon: Code2, title: 'RESTful API', description: 'Clean, predictable REST API with JSON responses. Every resource is documented with examples.' },
-              { icon: Webhook, title: 'Webhooks', description: 'Real-time event notifications for payment success, failure, refunds, and more.' },
-              { icon: BookOpen, title: 'Documentation', description: 'Comprehensive documentation with guides, API reference, and code examples for every flow.' },
-              { icon: Terminal, title: 'Test Mode', description: 'Full sandbox environment to test every payment flow without processing real money.' },
-              { icon: Shield, title: 'Signature Verification', description: 'Webhook signature verification to ensure all incoming events are genuine.' },
-              { icon: Zap, title: 'Idempotent Requests', description: 'Idempotency keys to safely retry requests without creating duplicate payments.' },
-            ].map((f, i) => (
-              <ScrollReveal key={f.title} delay={i * 0.08}>
-                <div className="p-6 bg-white rounded-2xl border border-slate-100 shadow-[0_1px_4px_rgba(0,0,0,0.06),0_4px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_24px_rgba(26,86,219,0.1)] hover:-translate-y-0.5 transition-all duration-300">
-                  <div className="w-11 h-11 bg-[#EFF6FF] rounded-xl flex items-center justify-center mb-4">
-                    <f.icon className="w-5 h-5 text-[#1A56DB]" />
+            {serverUtils.map((sdk, i) => (
+              <motion.div
+                key={sdk.name}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-20px' }}
+                transition={{ duration: 0.4, delay: i * 0.07 }}
+                className="group flex flex-col items-center text-center bg-white rounded-2xl border border-slate-100
+                           shadow-[0_2px_12px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_36px_rgba(26,86,219,0.12)]
+                           hover:-translate-y-1 transition-all duration-300 p-8"
+              >
+                <div className="h-24 flex items-center justify-center mb-5">
+                  <img
+                    src={`/images/dev/${sdk.file}`}
+                    alt={`${sdk.name} SDK`}
+                    loading="lazy"
+                    className="max-h-20 max-w-[160px] object-contain group-hover:scale-105 transition-transform duration-300"
+                    onError={(e) => {
+                      const el = e.currentTarget
+                      el.style.display = 'none'
+                      const fb = el.nextElementSibling as HTMLElement
+                      if (fb) fb.style.display = 'flex'
+                    }}
+                  />
+                  <div className="hidden w-20 h-20 rounded-2xl bg-[#EFF6FF] items-center justify-center">
+                    <Code2 className="w-9 h-9 text-[#1A56DB]" strokeWidth={1.5} />
                   </div>
-                  <h3 className="font-bold text-[#0F1E5C] mb-2">{f.title}</h3>
-                  <p className="text-sm text-slate-500 leading-relaxed">{f.description}</p>
                 </div>
-              </ScrollReveal>
+
+                <h3 className="text-base font-bold text-[#0F1E5C] tracking-[-0.02em] mb-1">{sdk.name}</h3>
+                <p className="text-xs text-slate-400 leading-relaxed mb-6 max-w-[220px]">{sdk.desc}</p>
+
+                <span className="inline-flex items-center gap-2 bg-[#1A56DB] text-white font-semibold text-sm
+                                 px-6 py-2.5 rounded-lg group-hover:bg-[#1648C8] transition-colors cursor-default select-none">
+                  <Download className="w-4 h-4" strokeWidth={2.2} />
+                  Download
+                </span>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* SDKs */}
-      <section className="section-padding bg-white">
+      {/* ══ API DOCUMENTATION BAND ══ */}
+      <section className="pt-4 pb-16 sm:pb-20 lg:pb-24 bg-slate-50">
         <div className="container-wide">
-          <SectionHeader label="SDKs" title="Your Language, Your Choice" subtitle="Official SDKs and community libraries for popular languages and frameworks." />
-          <div className="flex flex-wrap justify-center gap-3 mt-10">
-            {sdks.map((sdk, i) => (
-              <ScrollReveal key={sdk} delay={i * 0.05}>
-                <div className="flex items-center gap-2 px-5 py-3 bg-[#EFF6FF] rounded-xl border border-[#DBEAFE]">
-                  <CheckCircle2 className="w-4 h-4 text-[#1A56DB]" />
-                  <span className="font-semibold text-[#0F1E5C] text-sm">{sdk}</span>
+          <ScrollReveal>
+            <div className="bg-gradient-to-br from-[#1A56DB] to-[#0F1E5C] rounded-3xl px-8 sm:px-12 py-10 sm:py-12 relative overflow-hidden">
+              <div className="absolute inset-0"
+                style={{
+                  backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)',
+                  backgroundSize: '48px 48px'
+                }} />
+              <div className="relative z-10">
+                <div className="inline-flex items-center gap-2 mb-4">
+                  <span className="w-2 h-2 bg-white/60 rounded-full" />
+                  <span className="text-white/70 text-xs font-bold uppercase tracking-[0.14em]">API Documentation</span>
                 </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-[-0.04em] mb-2">
+                  Integrate Quickly with Comprehensive Docs
+                </h2>
+                <p className="text-blue-100/70 text-sm leading-relaxed mb-8 max-w-2xl">
+                  Everything you need to integrate Matrix Gateway. Test our APIs on staging right away.
+                </p>
 
-      {/* Webhook section */}
-      <section className="section-padding bg-slate-900">
-        <div className="container-wide">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <ScrollReveal direction="left">
-              <SectionHeader label="Webhooks" title="Stay in Sync with Every Event" light center={false} />
-              <p className="text-blue-100/70 mt-4 mb-6 leading-relaxed text-sm">
-                Subscribe to webhook events and get notified the instant something happens — no polling required.
-              </p>
-              <div className="space-y-2">
-                {['payment.success', 'payment.failed', 'payment.refunded', 'subscription.charged', 'payout.completed', 'invoice.paid'].map((event) => (
-                  <div key={event} className="flex items-center gap-3 bg-white/5 rounded-lg px-4 py-2">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 flex-shrink-0" />
-                    <code className="text-sm text-slate-300 font-mono">{event}</code>
-                  </div>
-                ))}
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal direction="right">
-              <div className="bg-slate-800 rounded-2xl overflow-hidden">
-                <div className="px-5 py-3 bg-slate-700 flex items-center gap-2">
-                  <Webhook className="w-4 h-4 text-slate-400" />
-                  <span className="text-sm text-slate-300 font-mono">Webhook Payload</span>
-                </div>
-                <div className="p-5 font-mono text-xs leading-relaxed text-slate-300">
-                  <pre className="overflow-x-auto whitespace-pre-wrap">{`{
-  "event": "payment.success",
-  "id": "evt_abc123",
-  "created_at": "2026-09-22T09:41:00Z",
-  "data": {
-    "payment_id": "pay_xyz123abc",
-    "order_id": "ord_456",
-    "amount": 49900,
-    "currency": "INR",
-    "method": "upi",
-    "status": "captured",
-    "customer": {
-      "name": "Customer Name",
-      "email": "customer@example.com"
-    }
-  }
-}`}</pre>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  {[
+                    'Payout / Disbursement API Guide',
+                    'Payment Gateway Integration Guide',
+                  ].map((doc) => (
+                    <span key={doc}
+                      className="inline-flex items-center gap-2.5 bg-white text-[#0F1E5C] font-semibold text-sm
+                                 px-6 py-3.5 rounded-xl shadow-md hover:shadow-lg transition-shadow cursor-default select-none">
+                      <FileText className="w-4 h-4 text-[#1A56DB]" strokeWidth={2} />
+                      {doc}
+                      <Download className="w-4 h-4 text-slate-400" strokeWidth={2} />
+                    </span>
+                  ))}
                 </div>
               </div>
-            </ScrollReveal>
-          </div>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
