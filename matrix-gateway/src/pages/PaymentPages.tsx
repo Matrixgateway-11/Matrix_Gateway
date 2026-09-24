@@ -80,7 +80,7 @@ export default function PaymentPages() {
                 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.24 }}
                 className="flex flex-col sm:flex-row gap-3"
               >
-                <Link to="/signup"
+                <Link to="/contact"
                   className="inline-flex items-center justify-center gap-2 bg-[#1A56DB] text-white font-bold text-sm px-7 py-3.5 rounded-xl hover:bg-[#1648C8] transition-colors shadow-lg active:scale-[0.98]">
                   Get Started <ArrowRight className="w-4 h-4" strokeWidth={2.5} />
                 </Link>
@@ -92,14 +92,12 @@ export default function PaymentPages() {
             </div>
 
             <div className="relative flex justify-center lg:justify-end">
-              <motion.div
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-[#60A5FA]/25 rounded-full blur-3xl pointer-events-none" />
+              <motion.img
                 initial={{ opacity: 0, y: 24, scale: 0.97 }} animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.25, ease: 'easeOut' }}
-                className="relative rounded-2xl overflow-hidden shadow-[0_24px_60px_rgba(15,30,92,0.3)] w-full max-w-sm"
-              >
-                <img src="/images/pages-hero.png" alt="Custom payment pages illustration" width={480} height={480}
-                  className="w-full h-auto object-cover" />
-              </motion.div>
+                src="/images/pages-hero.png" alt="Custom payment pages illustration" width={480} height={480}
+                className="relative w-full max-w-sm h-auto object-contain drop-shadow-2xl" />
             </div>
           </div>
         </div>

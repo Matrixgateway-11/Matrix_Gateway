@@ -1,6 +1,6 @@
 ﻿import {
   CreditCard, Link2, LayoutTemplate, ArrowRightLeft,
-  Wallet, RefreshCw, GitBranch, FileText, Smartphone, Layers,
+  Wallet, GitBranch, FileText, Layers,
   type LucideIcon,
 } from 'lucide-react'
 
@@ -16,7 +16,7 @@ export interface ServiceNavItem {
   icon: LucideIcon
 }
 
-/* Ordered exactly as the reference: single flowing list of all services */
+/* Ordered service list shown in the Services dropdown */
 export const servicesNav: ServiceNavItem[] = [
   { label: 'Payments',        href: '/payment',          description: 'All payment collection products',          icon: Layers },
   { label: 'Payouts',         href: '/payouts',          description: 'Send money to vendors & customers',        icon: ArrowRightLeft },
@@ -24,10 +24,8 @@ export const servicesNav: ServiceNavItem[] = [
   { label: 'Payment Gateway', href: '/payment-gateway',  description: 'Accept cards, UPI, wallets & netbanking',   icon: CreditCard },
   { label: 'Payment Link',    href: '/payment-links',    description: 'Share payment links without a website',     icon: Link2 },
   { label: 'Payment Pages',   href: '/payment-pages',    description: 'Custom-branded payment pages',              icon: LayoutTemplate },
-  { label: 'Subscription',    href: '/subscriptions',    description: 'Automated recurring billing',               icon: RefreshCw },
   { label: 'Route',           href: '/route',            description: 'Intelligent payment routing',               icon: GitBranch },
   { label: 'Invoice',         href: '/invoice',          description: 'Digital invoicing & collection',            icon: FileText },
-  { label: 'UPI',             href: '/upi',              description: 'Native UPI payment experiences',            icon: Smartphone },
 ]
 
 /* Main nav — Home and Services are rendered separately in the Navbar.

@@ -1,12 +1,13 @@
 ﻿export const companyInfo = {
   name: 'Matrix Gateway',
+  legalName: 'MATRIX GATEWAY PRIVATE LIMITED',
   tagline: 'Modern Payment Infrastructure',
   description: 'Matrix Gateway provides comprehensive payment solutions for Indian businesses — from accepting payments to disbursing payouts, all through a single, developer-friendly platform.',
   email: 'contact@matrixgateway.in',
   support: 'support@matrixgateway.in',
   phone: '+91-XXXXX-XXXXX',
-  address: 'Chennai, Tamil Nadu, India',
-  cin: 'Placeholder — update with official CIN',
+  address: 'Puducherry, India',
+  cin: 'U62099PY2025PTC009515',
 }
 
 export const trustMetrics = [
@@ -39,12 +40,10 @@ export const footerLinks = {
     { label: 'Payment Pages', href: '/payment-pages' },
     { label: 'Payouts', href: '/payouts' },
     { label: 'Wallets', href: '/wallets' },
-    { label: 'Subscriptions', href: '/subscriptions' },
   ],
   solutions: [
     { label: 'Route', href: '/route' },
     { label: 'Invoice', href: '/invoice' },
-    { label: 'UPI', href: '/upi' },
   ],
   company: [
     { label: 'About', href: '/about' },
@@ -52,8 +51,8 @@ export const footerLinks = {
     { label: 'Developers', href: '/developers' },
     { label: 'Contact', href: '/contact' },
   ],
-  account: [
-    { label: 'Login', href: '/login' },
-    { label: 'Sign Up', href: '/signup' },
+  getStarted: [
+    { label: 'Get Started', href: '/contact' },
+    { label: 'Talk to Sales', href: '/contact' },
   ],
 }

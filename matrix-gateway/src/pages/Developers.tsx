@@ -157,7 +157,7 @@ export default function Developers() {
                 transition={{ duration: 0.4, delay: 0.24 }}
                 className="flex flex-col sm:flex-row gap-3"
               >
-                <Link to="/signup"
+                <Link to="/contact"
                   className="inline-flex items-center justify-center gap-2 bg-[#1A56DB] text-white font-bold text-sm px-7 py-3.5 rounded-xl hover:bg-[#1648C8] transition-colors shadow-lg active:scale-[0.98]">
                   Start Building <ArrowRight className="w-4 h-4" strokeWidth={2.5} />
                 </Link>

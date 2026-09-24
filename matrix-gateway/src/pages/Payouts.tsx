@@ -1,106 +1,120 @@
-﻿import { ArrowRightLeft, CheckCircle2, Zap, Users, FileText, BarChart3, ArrowRight } from 'lucide-react'
+﻿import { motion } from 'framer-motion'
+import {
+  ArrowRight, CreditCard, TestTube2, Link2, Building2, ShoppingCart, Gamepad2,
+  CheckCircle2, ArrowRightLeft,
+} from 'lucide-react'
 import { Link } from 'react-router-dom'
-import SectionHeader from '../components/SectionHeader'
-import CTASection from '../components/CTASection'
 import ScrollReveal from '../components/ScrollReveal'
 
+/* Supercharge use-case cards */
 const useCases = [
-  { icon: Users, title: 'Vendor Payments', description: 'Pay multiple vendors and suppliers simultaneously with bulk payout support.' },
-  { icon: ArrowRightLeft, title: 'Customer Refunds', description: 'Process refunds directly to customer bank accounts or UPI IDs.' },
-  { icon: FileText, title: 'Salary Disbursement', description: 'Automate salary and commission payments for your team.' },
-  { icon: Zap, title: 'Partner Commissions', description: 'Distribute commissions and partner payouts automatically.' },
+  { icon: CreditCard, title: 'Corporate Credit Cards', desc: 'Keep a tab on your expenses and manage funds effectively with corporate cards.' },
+  { icon: TestTube2, title: 'Penny Testing', desc: 'Validate bank account details by making small sample transactions before payouts.' },
+  { icon: Link2, title: 'Payout Links', desc: 'Send easy-to-create links to capture the necessary beneficiary account details.' },
+  { icon: Building2, title: 'Rental Business', desc: 'Automate rent collection and disbursements for property and rental businesses.' },
+  { icon: ShoppingCart, title: 'E-commerce', desc: 'Easily make vendor payments and disburse instant refunds to different customers.' },
+  { icon: Gamepad2, title: 'Online Gaming', desc: 'Instantly pay out cashbacks, winnings, and earnings directly to your users.' },
 ]
-
-const modes = ['Bank Account (NEFT/RTGS/IMPS)', 'UPI ID', 'Wallet Transfer', 'IFSC-based Transfer']
 
 export default function Payouts() {
   return (
     <>
-      <section className="bg-[#040E2B] py-20">
-        <div className="container-wide">
-          <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 text-[#60A5FA] text-xs font-bold uppercase tracking-[0.14em] mb-5"><span className="w-2 h-2 bg-[#60A5FA] rounded-full" />Payouts</span>
-            <h1 className="text-[2.6rem] sm:text-5xl font-extrabold text-white mb-5 leading-[1.1] tracking-[-0.04em]">
-              Disburse Funds<br />
-              <span className="bg-gradient-to-r from-[#60A5FA] to-[#93C5FD] bg-clip-text text-transparent">
-                Instantly at Scale
-              </span>
-            </h1>
-            <p className="text-lg text-blue-100/80 mb-8 max-w-xl leading-relaxed">
-              Send money to anyone — customers, vendors, partners, employees — through a single, reliable API. One-click or bulk, we handle it.
-            </p>
-            <Link to="/signup" className="inline-flex items-center gap-2 bg-[#1A56DB] text-white font-bold text-sm px-6 py-3 rounded-lg hover:bg-[#1648C8] transition-colors shadow-lg active:scale-[0.98]">
-              Start Sending Payouts <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* ══ HERO ══ */}
+      <section className="relative bg-gradient-to-b from-[#F0F4FF] to-white overflow-hidden">
+        <div className="hidden lg:block absolute top-0 right-0 w-[42%] h-full pointer-events-none"
+          style={{ background: 'linear-gradient(135deg, #1A56DB 0%, #0F1E5C 100%)', clipPath: 'polygon(18% 0%, 100% 0%, 100% 100%, 0% 100%)' }} />
 
-      {/* Stats */}
-      <section className="py-12 bg-white border-b border-slate-100">
-        <div className="container-wide grid grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            { v: 'Instant', l: 'IMPS Transfers' },
-            { v: 'Bulk', l: 'Payout Support' },
-            { v: 'T+1', l: 'Settlement Cycle' },
-            { v: 'All Modes', l: 'Transfer Options' },
-          ].map(({ v, l }, i) => (
-            <ScrollReveal key={l} delay={i * 0.1}>
-              <div className="text-center">
-                <p className="text-3xl font-black text-[#0F1E5C]">{v}</p>
-                <p className="text-sm text-slate-500 mt-1">{l}</p>
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
-      </section>
+        <div className="container-wide relative z-10 py-20 lg:py-24">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
 
-      {/* Use cases */}
-      <section className="section-padding bg-slate-50">
-        <div className="container-wide">
-          <SectionHeader label="Use Cases" title="One Platform for All Your Disbursements" subtitle="Whether you're paying one vendor or a thousand — Matrix Gateway Payouts handles it." />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-12">
-            {useCases.map((uc, i) => (
-              <ScrollReveal key={uc.title} delay={i * 0.1}>
-                <div className="p-6 bg-white rounded-2xl border border-slate-100 shadow-[0_1px_4px_rgba(0,0,0,0.06),0_4px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_24px_rgba(26,86,219,0.1)] hover:-translate-y-1 transition-all duration-300">
-                  <div className="w-12 h-12 bg-[#EFF6FF] rounded-xl flex items-center justify-center mb-4">
-                    <uc.icon className="w-6 h-6 text-[#1A56DB]" />
-                  </div>
-                  <h3 className="font-bold text-[#0F1E5C] mb-2">{uc.title}</h3>
-                  <p className="text-sm text-slate-500 leading-relaxed">{uc.description}</p>
+            <div className="max-w-xl">
+              <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
+                <div className="inline-flex items-center gap-2 mb-5">
+                  <span className="w-2 h-2 bg-[#1A56DB] rounded-full" />
+                  <span className="text-[#1A56DB] text-xs font-bold uppercase tracking-[0.14em]">Payouts</span>
                 </div>
-              </ScrollReveal>
-            ))}
+              </motion.div>
+
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.08 }}
+                className="text-[2.4rem] sm:text-5xl lg:text-[3rem] font-extrabold text-[#0F1E5C] leading-[1.12] tracking-[-0.04em] mb-5"
+              >
+                Matrix Gateway{' '}
+                <span className="bg-gradient-to-r from-[#1A56DB] to-[#60A5FA] bg-clip-text text-transparent">
+                  Payouts
+                </span>
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.16 }}
+                className="text-slate-500 text-base sm:text-lg mb-8 max-w-lg leading-relaxed"
+              >
+                Disbursing money is an inevitable part of business — and the better the technology, the better
+                the results. Matrix Gateway brings you a powerful set of payout tools that make sending money
+                fast, reliable, and effortless.
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.24 }}
+                className="flex flex-col sm:flex-row gap-3"
+              >
+                <Link to="/contact"
+                  className="inline-flex items-center justify-center gap-2 bg-[#1A56DB] text-white font-bold text-sm px-7 py-3.5 rounded-xl hover:bg-[#1648C8] transition-colors shadow-lg active:scale-[0.98]">
+                  Get Started <ArrowRight className="w-4 h-4" strokeWidth={2.5} />
+                </Link>
+                <Link to="/payment"
+                  className="inline-flex items-center justify-center gap-2 text-[#1A56DB] font-semibold text-sm px-7 py-3.5 rounded-xl border-2 border-[#1A56DB] hover:bg-[#EFF6FF] transition-colors active:scale-[0.98]">
+                  Explore Payments
+                </Link>
+              </motion.div>
+            </div>
+
+            {/* Right — hero image (dark render → framed card, graceful fallback) */}
+            <div className="relative flex justify-center lg:justify-end">
+              <motion.div
+                initial={{ opacity: 0, y: 24, scale: 0.97 }} animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.25, ease: 'easeOut' }}
+                className="relative rounded-2xl overflow-hidden shadow-[0_24px_60px_rgba(15,30,92,0.3)] w-full max-w-md bg-[#0A1240]"
+              >
+                <img
+                  src="/images/payout-hero.png"
+                  alt="Payout disbursement technology"
+                  width={560} height={440}
+                  className="w-full h-auto object-cover"
+                  onError={(e) => {
+                    const el = e.currentTarget
+                    el.style.display = 'none'
+                    const fb = el.nextElementSibling as HTMLElement
+                    if (fb) fb.style.display = 'flex'
+                  }}
+                />
+                <div className="hidden aspect-[5/4] flex-col items-center justify-center text-center px-8">
+                  <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center mb-4">
+                    <ArrowRightLeft className="w-8 h-8 text-[#60A5FA]" strokeWidth={1.5} />
+                  </div>
+                  <p className="text-white font-bold text-lg tracking-[-0.02em]">Instant Payouts</p>
+                  <p className="text-blue-200/60 text-sm mt-1">Disburse funds at scale, effortlessly</p>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Transfer modes */}
+      {/* ══ ABOUT PAYOUTS ══ */}
       <section className="section-padding bg-white">
         <div className="container-wide">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <ScrollReveal direction="left">
-              <h2 className="text-3xl font-extrabold text-[#0F1E5C] tracking-[-0.04em] mb-4">Flexible Transfer Modes</h2>
-              <p className="text-slate-500 mb-6">Send payouts through whichever channel works best for your recipients.</p>
-              <div className="space-y-3">
-                {modes.map((m) => (
-                  <div key={m} className="flex items-center gap-3 p-4 bg-[#EFF6FF] rounded-xl">
-                    <CheckCircle2 className="w-5 h-5 text-[#1A56DB] flex-shrink-0" />
-                    <span className="font-medium text-[#0F1E5C] text-sm">{m}</span>
-                  </div>
-                ))}
-              </div>
-            </ScrollReveal>
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
-            {/* Payout dashboard mock */}
-            <ScrollReveal direction="right">
-              <div className="bg-slate-900 rounded-2xl p-5 shadow-2xl">
+            {/* Left — payout dashboard mock */}
+            <ScrollReveal direction="left">
+              <div className="bg-slate-900 rounded-2xl p-5 shadow-[0_20px_50px_rgba(15,30,92,0.25)]">
                 <div className="flex justify-between items-center mb-4">
                   <h3 className="text-white font-bold text-sm">Payout Dashboard</h3>
                   <span className="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded-full">Live</span>
                 </div>
                 <div className="grid grid-cols-3 gap-3 mb-4">
-                  {[{ l: 'Sent Today', v: '₹8.4L' }, { l: 'Pending', v: '₹1.2L' }, { l: 'Success Rate', v: '99.2%' }].map(({ l, v }) => (
+                  {[{ l: 'Sent Today', v: '₹8.4L' }, { l: 'Pending', v: '₹1.2L' }, { l: 'Success', v: '99.2%' }].map(({ l, v }) => (
                     <div key={l} className="bg-slate-800 rounded-xl p-3 text-center">
                       <p className="text-white font-bold text-base">{v}</p>
                       <p className="text-slate-400 text-xs mt-0.5">{l}</p>
@@ -128,11 +142,74 @@ export default function Payouts() {
                 </div>
               </div>
             </ScrollReveal>
+
+            {/* Right — text */}
+            <ScrollReveal direction="right">
+              <div className="inline-flex items-center gap-2 mb-4">
+                <span className="w-2 h-2 bg-[#1A56DB] rounded-full" />
+                <span className="text-[#1A56DB] text-xs font-bold uppercase tracking-[0.14em]">About Payouts</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F1E5C] tracking-[-0.04em] leading-[1.15] mb-5">
+                Disburse Money with Ease
+              </h2>
+              <p className="text-slate-500 text-sm sm:text-base leading-relaxed mb-4">
+                It's easy with minimum documentation and hassle-free transactions. Matrix Gateway gives you the
+                convenience to send money to vendors, partners, employees, and customers — all from one place.
+              </p>
+              <p className="text-slate-500 text-sm sm:text-base leading-relaxed mb-6">
+                Payouts come with all the features you need: multiple transfer modes, bulk disbursement, plus
+                powerful capabilities like API-driven payouts, approvals, workflows, and insightful reports.
+              </p>
+              <div className="space-y-2.5">
+                {['Instant bank & UPI transfers', 'Bulk payout support', 'API-driven automation & approvals', 'Real-time status tracking'].map((item) => (
+                  <div key={item} className="flex items-center gap-2.5 text-sm text-slate-600">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" strokeWidth={2.5} />{item}
+                  </div>
+                ))}
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
-      <CTASection title="Start Disbursing at Scale" subtitle="Automate your payout workflows and save hours every week." primaryLabel="Set Up Payouts" />
+      {/* ══ SUPERCHARGE — tinted card grid ══ */}
+      <section className="section-padding bg-white">
+        <div className="container-wide">
+          <div className="bg-[#EFF6FF] rounded-3xl px-6 sm:px-10 lg:px-14 py-12 lg:py-16">
+            <ScrollReveal>
+              <div className="text-center mb-12">
+                <div className="inline-flex items-center gap-2 mb-4 justify-center">
+                  <span className="w-2 h-2 bg-[#1A56DB] rounded-full" />
+                  <span className="text-[#1A56DB] text-xs font-bold uppercase tracking-[0.14em]">Use Cases</span>
+                  <span className="w-2 h-2 bg-[#1A56DB] rounded-full" />
+                </div>
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F1E5C] tracking-[-0.04em]">
+                  Supercharge with Our Payouts
+                </h2>
+              </div>
+            </ScrollReveal>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {useCases.map((uc, i) => (
+                <motion.div
+                  key={uc.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-20px' }}
+                  transition={{ duration: 0.4, delay: i * 0.06 }}
+                  className="group bg-white rounded-2xl border border-white shadow-[0_2px_12px_rgba(15,30,92,0.05)] hover:shadow-[0_8px_28px_rgba(26,86,219,0.1)] hover:-translate-y-1 transition-all duration-300 p-6"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-[#EFF6FF] flex items-center justify-center mb-4 group-hover:bg-[#1A56DB] transition-colors duration-300">
+                    <uc.icon className="w-6 h-6 text-[#1A56DB] group-hover:text-white transition-colors duration-300" strokeWidth={1.7} />
+                  </div>
+                  <h3 className="text-base font-bold text-[#0F1E5C] tracking-[-0.02em] mb-1.5">{uc.title}</h3>
+                  <p className="text-sm text-slate-500 leading-relaxed">{uc.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   )
 }

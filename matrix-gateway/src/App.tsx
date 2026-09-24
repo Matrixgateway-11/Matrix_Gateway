@@ -8,18 +8,15 @@ const About = lazy(() => import('./pages/About'))
 const Partner = lazy(() => import('./pages/Partner'))
 const Developers = lazy(() => import('./pages/Developers'))
 const Contact = lazy(() => import('./pages/Contact'))
-const Login = lazy(() => import('./pages/Login'))
-const Signup = lazy(() => import('./pages/Signup'))
 const Payments = lazy(() => import('./pages/Payments'))
 const PaymentGateway = lazy(() => import('./pages/PaymentGateway'))
 const PaymentLinks = lazy(() => import('./pages/PaymentLinks'))
 const PaymentPages = lazy(() => import('./pages/PaymentPages'))
 const Payouts = lazy(() => import('./pages/Payouts'))
 const Wallets = lazy(() => import('./pages/Wallets'))
-const Subscriptions = lazy(() => import('./pages/Subscriptions'))
+
 const RoutePage = lazy(() => import('./pages/Route'))
 const Invoice = lazy(() => import('./pages/Invoice'))
-const UPI = lazy(() => import('./pages/UPI'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 function PageLoader() {
@@ -47,8 +44,6 @@ export default function App() {
             <Route path="partner" element={<Partner />} />
             <Route path="developers" element={<Developers />} />
             <Route path="contact" element={<Contact />} />
-            <Route path="login" element={<Login />} />
-            <Route path="signup" element={<Signup />} />
 
             {/* Payment routes */}
             <Route path="payment" element={<Payments />} />
@@ -57,10 +52,9 @@ export default function App() {
             <Route path="payment-pages" element={<PaymentPages />} />
             <Route path="payouts" element={<Payouts />} />
             <Route path="wallets" element={<Wallets />} />
-            <Route path="subscriptions" element={<Subscriptions />} />
+
             <Route path="route" element={<RoutePage />} />
             <Route path="invoice" element={<Invoice />} />
-            <Route path="upi" element={<UPI />} />
 
             {/* 404 */}
             <Route path="*" element={<NotFound />} />

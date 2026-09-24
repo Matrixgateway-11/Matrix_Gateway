@@ -131,11 +131,8 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
               </Link>
             ))}
 
-            <div className="pt-3 pb-1 flex flex-col gap-2 border-t border-slate-100 mt-2">
-              <Link to="/login" className="block w-full text-center py-2.5 rounded-lg text-sm font-semibold text-[#0F1E5C] border border-slate-200 hover:bg-slate-50 transition-colors">
-                Log In
-              </Link>
-              <Link to="/signup" className="block w-full text-center py-2.5 rounded-lg text-sm font-bold text-white bg-[#1A56DB] hover:bg-[#1648C8] transition-colors">
+            <div className="pt-3 pb-1 border-t border-slate-100 mt-2">
+              <Link to="/contact" className="block w-full text-center py-2.5 rounded-lg text-sm font-bold text-white bg-[#1A56DB] hover:bg-[#1648C8] transition-colors">
                 Get Started
               </Link>
             </div>
@@ -159,20 +156,24 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handler)
   }, [])
 
+  // Close everything on every route change (fires even for same-path clicks via key below)
   useEffect(() => {
     setMobileOpen(false)
     setServicesOpen(false)
   }, [location.pathname])
 
+  // Close the dropdown when clicking anywhere outside it
   useEffect(() => {
+    if (!servicesOpen) return
     function handleClickOutside(e: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
         setServicesOpen(false)
       }
     }
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [])
+    // pointerdown catches the interaction before click; only active while open
+    document.addEventListener('pointerdown', handleClickOutside)
+    return () => document.removeEventListener('pointerdown', handleClickOutside)
+  }, [servicesOpen])
 
   const isActive = (href: string) => location.pathname === href
   // Services is "active" when on any service page
@@ -225,11 +226,8 @@ export default function Navbar() {
           </nav>
 
           {/* Desktop CTA */}
-          <div className="hidden lg:flex items-center gap-2">
-            <Link to="/login" className="text-sm font-medium text-slate-600 hover:text-[#0F1E5C] px-3.5 py-2 rounded-lg hover:bg-slate-50 transition-colors">
-              Log In
-            </Link>
-            <Link to="/signup" className="text-sm font-bold text-white bg-[#1A56DB] hover:bg-[#1648C8] px-4 py-2 rounded-lg transition-colors shadow-sm">
+          <div className="hidden lg:flex items-center">
+            <Link to="/contact" className="text-sm font-bold text-white bg-[#1A56DB] hover:bg-[#1648C8] px-5 py-2.5 rounded-lg transition-colors shadow-sm">
               Get Started
             </Link>
           </div>

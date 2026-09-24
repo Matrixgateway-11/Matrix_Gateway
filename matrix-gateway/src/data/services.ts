@@ -1,6 +1,6 @@
 ﻿import {
   CreditCard, Link2, LayoutTemplate, ArrowRightLeft,
-  Wallet, RefreshCw, GitBranch, FileText, Smartphone,
+  Wallet, GitBranch, FileText,
   type LucideIcon,
 } from 'lucide-react'
 
@@ -67,16 +67,6 @@ export const services: Service[] = [
     features: ['User wallet management', 'Add money & withdraw', 'Instant transfers', 'Transaction history'],
   },
   {
-    id: 'subscriptions',
-    title: 'Subscriptions',
-    description: 'Automate recurring billing and manage subscription plans effortlessly.',
-    longDescription: 'Build subscription-based revenue models with automated billing. Manage plans, handle failures gracefully, and track subscriber lifecycle.',
-    icon: RefreshCw,
-    href: '/subscriptions',
-    color: 'text-orange-600',
-    features: ['Recurring billing automation', 'Flexible plan management', 'Smart retry on failure', 'Subscriber lifecycle tracking'],
-  },
-  {
     id: 'route',
     title: 'Route',
     description: 'Enable intelligent payment routing and distribution across multiple accounts.',
@@ -95,15 +85,5 @@ export const services: Service[] = [
     href: '/invoice',
     color: 'text-teal-600',
     features: ['Professional invoice creation', 'Integrated payment collection', 'Automated reminders', 'Status tracking & reporting'],
-  },
-  {
-    id: 'upi',
-    title: 'UPI',
-    description: 'Native UPI payment experiences — QR codes, collect requests, and deep links.',
-    longDescription: 'Implement UPI seamlessly with QR-based payments, collect requests, and intent flows. Fast, familiar, and trusted by hundreds of millions of Indians.',
-    icon: Smartphone,
-    href: '/upi',
-    color: 'text-blue-500',
-    features: ['QR code generation', 'UPI collect requests', 'Deep link support', 'Real-time settlement'],
   },
 ]

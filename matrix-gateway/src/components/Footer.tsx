@@ -69,11 +69,11 @@ export default function Footer() {
           <FooterCol title="Solutions" links={footerLinks.solutions} />
           <div className="space-y-8">
             <FooterCol title="Company" links={footerLinks.company} />
-            <FooterCol title="Account" links={footerLinks.account} />
+            <FooterCol title="Get Started" links={footerLinks.getStarted} />
           </div>
         </div>
 
-        {/* Bottom */}
+        {/* Bottom — links row */}
         <div className="pt-7 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-white/25">
             © {new Date().getFullYear()} Matrix Gateway. All rights reserved.
@@ -82,6 +82,13 @@ export default function Footer() {
             <Link to="#" className="text-xs text-white/25 hover:text-white/50 transition-colors">Privacy Policy</Link>
             <Link to="#" className="text-xs text-white/25 hover:text-white/50 transition-colors">Terms of Service</Link>
           </div>
+        </div>
+
+        {/* Legal copyright line */}
+        <div className="mt-6 pt-5 border-t border-white/[0.06] text-center">
+          <p className="text-xs text-white/30 leading-relaxed">
+            © Copyright {new Date().getFullYear()} {companyInfo.legalName}. CIN: {companyInfo.cin}. All Rights Reserved.
+          </p>
         </div>
       </div>
     </footer>

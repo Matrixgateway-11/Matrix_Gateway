@@ -2,7 +2,7 @@
 import { motion, useInView } from 'framer-motion'
 import {
   ArrowRight, CheckCircle2, CreditCard, Link2, LayoutTemplate,
-  ArrowRightLeft, Wallet, RefreshCw, GitBranch, FileText, Smartphone,
+  ArrowRightLeft, Wallet, GitBranch, FileText, Smartphone,
   ShieldCheck, Zap, Globe, Users, TrendingUp, type LucideIcon,
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
@@ -17,8 +17,7 @@ const serviceCards = [
   { icon: LayoutTemplate, title: 'Payment Gateway', desc: 'Experience Matrix Gateway\'s flawless integration of digital payment solutions.', href: '/payment-gateway' },
   { icon: Link2,        title: 'Payment Links',     desc: 'The ease of getting paid through shareable payment links — no website needed.', href: '/payment-links' },
   { icon: LayoutTemplate, title: 'Payment Pages',  desc: 'Tackle your payment lifecycles with technology that helps in advanced payment solutions.', href: '/payment-pages' },
-  { icon: RefreshCw,    title: 'Subscription',      desc: 'Offer subscription plans with automated recurring transactions on various payment modes.', href: '/subscriptions' },
-  { icon: GitBranch,    title: 'Route',             desc: 'One of India\'s top converged payment solutions for intelligent routing and distribution.', href: '/route' },
+  { icon: GitBranch,    title: 'Route',             desc: 'Intelligent routing and distribution for converged payment solutions.', href: '/route' },
   { icon: FileText,     title: 'Invoice',           desc: 'No matter what business your customers are in — Matrix Gateway helps you accept payments for everyone.', href: '/invoice' },
 ]
 
@@ -146,7 +145,7 @@ export default function Home() {
                 transition={{ duration: 0.4, delay: 0.22 }}
                 className="flex flex-col sm:flex-row gap-3"
               >
-                <Link to="/signup"
+                <Link to="/contact"
                   className="inline-flex items-center justify-center gap-2 bg-[#1A56DB] text-white
                              font-bold text-sm px-7 py-3.5 rounded-xl hover:bg-[#1648C8]
                              transition-colors shadow-lg active:scale-[0.98]">
@@ -391,7 +390,7 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-              <Link to="/signup"
+              <Link to="/contact"
                 className="inline-flex items-center gap-2 bg-[#1A56DB] text-white font-bold text-sm px-7 py-3.5 rounded-xl hover:bg-[#1648C8] transition-colors shadow-md active:scale-[0.98]">
                 Start Now <ArrowRight className="w-4 h-4" strokeWidth={2.5} />
               </Link>
