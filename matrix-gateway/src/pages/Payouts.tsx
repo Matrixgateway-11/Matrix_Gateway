@@ -1,7 +1,7 @@
 ﻿import { motion } from 'framer-motion'
 import {
   ArrowRight, CreditCard, TestTube2, Link2, Building2, ShoppingCart, Gamepad2,
-  CheckCircle2, ArrowRightLeft,
+  CheckCircle2,
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import ScrollReveal from '../components/ScrollReveal'
@@ -69,33 +69,17 @@ export default function Payouts() {
               </motion.div>
             </div>
 
-            {/* Right — hero image (dark render → framed card, graceful fallback) */}
+            {/* Right — transparent hero image (floats on panel) */}
             <div className="relative flex justify-center lg:justify-end">
-              <motion.div
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-[#60A5FA]/25 rounded-full blur-3xl pointer-events-none" />
+              <motion.img
                 initial={{ opacity: 0, y: 24, scale: 0.97 }} animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.25, ease: 'easeOut' }}
-                className="relative rounded-2xl overflow-hidden shadow-[0_24px_60px_rgba(15,30,92,0.3)] w-full max-w-md bg-[#0A1240]"
-              >
-                <img
-                  src="/images/payout-hero.png"
-                  alt="Payout disbursement technology"
-                  width={560} height={440}
-                  className="w-full h-auto object-cover"
-                  onError={(e) => {
-                    const el = e.currentTarget
-                    el.style.display = 'none'
-                    const fb = el.nextElementSibling as HTMLElement
-                    if (fb) fb.style.display = 'flex'
-                  }}
-                />
-                <div className="hidden aspect-[5/4] flex-col items-center justify-center text-center px-8">
-                  <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center mb-4">
-                    <ArrowRightLeft className="w-8 h-8 text-[#60A5FA]" strokeWidth={1.5} />
-                  </div>
-                  <p className="text-white font-bold text-lg tracking-[-0.02em]">Instant Payouts</p>
-                  <p className="text-blue-200/60 text-sm mt-1">Disburse funds at scale, effortlessly</p>
-                </div>
-              </motion.div>
+                src="/images/payout-hero.png"
+                alt="Payout disbursement technology"
+                width={560} height={440}
+                className="relative w-full max-w-md h-auto object-contain drop-shadow-2xl"
+              />
             </div>
           </div>
         </div>
