@@ -1,25 +1,32 @@
 ﻿import { useState, useEffect, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import {
-  ArrowRight, CheckCircle2, CreditCard, Link2, LayoutTemplate,
-  ArrowRightLeft, Wallet, GitBranch, FileText, Smartphone,
-  ShieldCheck, Zap, Globe, Users, TrendingUp, type LucideIcon,
-} from 'lucide-react'
+import { ArrowRight, CheckCircle2 } from 'lucide-react'
+import { TrendUp } from '@phosphor-icons/react'
 import { Link } from 'react-router-dom'
 import ScrollReveal from '../components/ScrollReveal'
 import CTASection from '../components/CTASection'
+import ServiceIconBadge from '../components/ServiceIcon'
 
-/* ─── service cards data ─────────────────────────────── */
+/* ─── service cards data (icon key → duotone icon via ServiceIconBadge) ── */
 const serviceCards = [
-  { icon: CreditCard,   title: 'Payment Gateway',  desc: 'Accept online payments through cards, UPI, wallets & net banking — all in one integration.', href: '/payment-gateway' },
-  { icon: ArrowRightLeft, title: 'Payouts',         desc: 'Send money instantly to vendors, customers, and partners at scale.', href: '/payouts' },
-  { icon: Wallet,       title: 'Wallets',           desc: 'Manage digital balances and embedded wallet flows for your platform.', href: '/wallets' },
-  { icon: LayoutTemplate, title: 'Payment Gateway', desc: 'Experience Matrix Gateway\'s flawless integration of digital payment solutions.', href: '/payment-gateway' },
-  { icon: Link2,        title: 'Payment Links',     desc: 'The ease of getting paid through shareable payment links — no website needed.', href: '/payment-links' },
-  { icon: LayoutTemplate, title: 'Payment Pages',  desc: 'Tackle your payment lifecycles with technology that helps in advanced payment solutions.', href: '/payment-pages' },
-  { icon: GitBranch,    title: 'Route',             desc: 'Intelligent routing and distribution for converged payment solutions.', href: '/route' },
-  { icon: FileText,     title: 'Invoice',           desc: 'No matter what business your customers are in — Matrix Gateway helps you accept payments for everyone.', href: '/invoice' },
+  { icon: 'payment-gateway', title: 'Payment Gateway', desc: 'Accept online payments through cards, UPI, wallets & net banking — all in one integration.', href: '/payment-gateway' },
+  { icon: 'payouts',         title: 'Payouts',          desc: 'Send money instantly to vendors, customers, and partners at scale.', href: '/payouts' },
+  { icon: 'wallets',         title: 'Wallets',          desc: 'Manage digital balances and embedded wallet flows for your platform.', href: '/wallets' },
+  { icon: 'payment-links',   title: 'Payment Links',    desc: 'The ease of getting paid through shareable payment links — no website needed.', href: '/payment-links' },
+  { icon: 'payment-pages',   title: 'Payment Pages',    desc: 'Tackle your payment lifecycles with technology that helps in advanced payment solutions.', href: '/payment-pages' },
+  { icon: 'payments',        title: 'Payments',         desc: 'One suite for every way you collect — cards, UPI, links, pages, and more.', href: '/payment' },
+  { icon: 'route',           title: 'Route',            desc: 'Intelligent routing and distribution for converged payment solutions.', href: '/route' },
+  { icon: 'invoice',         title: 'Invoice',          desc: 'No matter what business your customers are in — Matrix Gateway helps you accept payments for everyone.', href: '/invoice' },
 ]
+
+const whyIcons: Record<string, string> = {
+  'Security-Conscious Design': 'security',
+  'Instant Processing': 'speed',
+  '150+ Payment Methods': 'methods',
+  'For All Business Types': 'business',
+  'Scalable Infrastructure': 'scalable',
+  'Mobile Ready': 'mobile',
+}
 
 const paymentModes = [
   { img: '/images/onsite-payments.png',  label: 'Onsite Payments',  desc: 'In-person card & UPI acceptance' },
@@ -270,46 +277,40 @@ export default function Home() {
             </div>
           </ScrollReveal>
 
-          {/* extra top padding (pt-10) leaves room for the overhanging icon badges */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-14 pt-10">
-            {serviceCards.map((svc, i) => {
-              const Icon = svc.icon
-              return (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-20px' }}
-                  transition={{ duration: 0.4, delay: i * 0.06 }}
-                  className="relative"
-                >
-                  <Link to={svc.href}
-                    className="group relative flex flex-col bg-white rounded-2xl pt-12 px-7 pb-8 border border-slate-100
-                               shadow-[0_4px_20px_rgba(15,30,92,0.06)] hover:shadow-[0_12px_40px_rgba(26,86,219,0.14)]
-                               hover:-translate-y-1.5 transition-all duration-300 h-full">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {serviceCards.map((svc, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-20px' }}
+                transition={{ duration: 0.4, delay: i * 0.06 }}
+                className="relative"
+              >
+                <Link to={svc.href}
+                  className="group relative flex flex-col bg-white rounded-2xl p-7 border border-slate-100
+                             shadow-[0_4px_20px_rgba(15,30,92,0.06)] hover:shadow-[0_12px_40px_rgba(26,86,219,0.14)]
+                             hover:-translate-y-1.5 transition-all duration-300 h-full">
 
-                    {/* Floating overlapping icon badge — sits half above the card's top edge */}
-                    <div className="absolute -top-7 left-7 w-14 h-14 rounded-2xl
-                                    bg-gradient-to-br from-[#1A56DB] to-[#0F1E5C]
-                                    flex items-center justify-center
-                                    shadow-[0_8px_20px_rgba(26,86,219,0.35)]
-                                    group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300">
-                      <Icon className="w-6 h-6 text-white" strokeWidth={1.9} />
-                    </div>
+                  {/* Naked duotone icon — sits free, no tile */}
+                  <ServiceIconBadge
+                    name={svc.icon}
+                    size={44}
+                    variant="naked"
+                    className="mb-5 group-hover:scale-110 group-hover:-translate-y-0.5 transition-transform duration-300"
+                  />
 
-                    <h3 className="text-base font-bold text-[#0F1E5C] mb-2 tracking-[-0.02em]">{svc.title}</h3>
-                    <p className="text-sm text-slate-500 leading-relaxed flex-1">{svc.desc}</p>
+                  <h3 className="text-base font-bold text-[#0F1E5C] mb-2 tracking-[-0.02em]">{svc.title}</h3>
+                  <p className="text-sm text-slate-500 leading-relaxed flex-1">{svc.desc}</p>
 
-                    {/* subtle learn-more affordance on hover */}
-                    <span className="mt-4 inline-flex items-center gap-1.5 text-[#1A56DB] text-sm font-semibold
-                                     opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
-                      Learn more
-                      <ArrowRight className="w-3.5 h-3.5" strokeWidth={2.5} />
-                    </span>
-                  </Link>
-                </motion.div>
-              )
-            })}
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-[#1A56DB] text-sm font-semibold
+                                   opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                    Learn more
+                    <ArrowRight className="w-3.5 h-3.5" strokeWidth={2.5} />
+                  </span>
+                </Link>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -363,7 +364,7 @@ export default function Home() {
 
                   {/* Trend arrow */}
                   <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-slate-100">
-                    <TrendingUp className="w-4 h-4 text-emerald-500" strokeWidth={2.5} />
+                    <TrendUp size={16} weight="bold" className="text-emerald-500" />
                     <span className="text-xs font-bold text-emerald-600">Revenue Growing</span>
                   </div>
                 </div>
@@ -481,33 +482,28 @@ export default function Home() {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
-              { icon: ShieldCheck, title: 'Security-Conscious Design', desc: 'Payment workflows built with secure data handling and encrypted transmission at every layer.' },
-              { icon: Zap,         title: 'Instant Processing',        desc: 'Real-time payment confirmation so your customers get a seamless checkout experience.' },
-              { icon: Globe,       title: '150+ Payment Methods',      desc: 'UPI, cards, net banking, wallets, EMI — one integration, all methods.' },
-              { icon: Users,       title: 'For All Business Types',    desc: 'Registered or unregistered, online or offline — Matrix Gateway works for everyone.' },
-              { icon: TrendingUp,  title: 'Scalable Infrastructure',   desc: 'Built to handle growing transaction volumes without any performance compromise.' },
-              { icon: Smartphone,  title: 'Mobile Ready',              desc: 'Every checkout experience is fully optimised for mobile — where India pays.' },
-            ].map((item, i) => {
-              const Icon = item.icon
-              return (
-                <motion.div
-                  key={item.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-20px' }}
-                  transition={{ duration: 0.4, delay: i * 0.07 }}
-                  className="flex gap-4 p-5 rounded-xl border border-slate-100 hover:border-[#1A56DB]/20 hover:shadow-[0_4px_20px_rgba(26,86,219,0.07)] transition-all duration-300"
-                >
-                  <div className="w-10 h-10 bg-[#EFF6FF] rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Icon className="w-5 h-5 text-[#1A56DB]" strokeWidth={1.8} />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-bold text-[#0F1E5C] mb-1 tracking-[-0.02em]">{item.title}</h3>
-                    <p className="text-xs text-slate-500 leading-relaxed">{item.desc}</p>
-                  </div>
-                </motion.div>
-              )
-            })}
+              { title: 'Security-Conscious Design', desc: 'Payment workflows built with secure data handling and encrypted transmission at every layer.' },
+              { title: 'Instant Processing',        desc: 'Real-time payment confirmation so your customers get a seamless checkout experience.' },
+              { title: '150+ Payment Methods',      desc: 'UPI, cards, net banking, wallets, EMI — one integration, all methods.' },
+              { title: 'For All Business Types',    desc: 'Registered or unregistered, online or offline — Matrix Gateway works for everyone.' },
+              { title: 'Scalable Infrastructure',   desc: 'Built to handle growing transaction volumes without any performance compromise.' },
+              { title: 'Mobile Ready',              desc: 'Every checkout experience is fully optimised for mobile — where India pays.' },
+            ].map((item, i) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-20px' }}
+                transition={{ duration: 0.4, delay: i * 0.07 }}
+                className="flex gap-4 p-5 rounded-xl border border-slate-100 hover:border-[#1A56DB]/20 hover:shadow-[0_4px_20px_rgba(26,86,219,0.07)] transition-all duration-300"
+              >
+                <ServiceIconBadge name={whyIcons[item.title]} size={30} variant="naked" className="flex-shrink-0 mt-0.5" />
+                <div>
+                  <h3 className="text-sm font-bold text-[#0F1E5C] mb-1 tracking-[-0.02em]">{item.title}</h3>
+                  <p className="text-xs text-slate-500 leading-relaxed">{item.desc}</p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

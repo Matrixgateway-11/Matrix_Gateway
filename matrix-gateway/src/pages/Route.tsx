@@ -1,7 +1,8 @@
 ﻿import { motion } from 'framer-motion'
-import { ArrowRight, Link2, ArrowRightLeft, Handshake } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import ScrollReveal from '../components/ScrollReveal'
+import ServiceIconBadge from '../components/ServiceIcon'
 
 /* Payment lifecycle use-case cards */
 const lifecycleCards = [
@@ -39,11 +40,11 @@ const lifecycleCards = [
   },
 ]
 
-/* Overlapping-icon feature cards */
+/* Feature cards */
 const featureCards = [
-  { icon: Link2, title: 'Linked Accounts', desc: 'No paperwork. Hassle-free online onboarding lets you easily add vendors, sellers, and service providers as linked accounts on Route.' },
-  { icon: ArrowRightLeft, title: 'Transfer', desc: 'Cut down the complexity. For every payment, create as many transfers as you need to other linked accounts — you decide how to split.' },
-  { icon: Handshake, title: 'Settlements', desc: 'Have everything under control. Manage the entire fund movement with flexible settlement plans — periodic or deferred, as you need.' },
+  { icon: 'linked-accounts', title: 'Linked Accounts', desc: 'No paperwork. Hassle-free online onboarding lets you easily add vendors, sellers, and service providers as linked accounts on Route.' },
+  { icon: 'transfer', title: 'Transfer', desc: 'Cut down the complexity. For every payment, create as many transfers as you need to other linked accounts — you decide how to split.' },
+  { icon: 'settlement', title: 'Settlements', desc: 'Have everything under control. Manage the entire fund movement with flexible settlement plans — periodic or deferred, as you need.' },
 ]
 
 export default function RoutePage() {
@@ -193,37 +194,28 @@ export default function RoutePage() {
         </div>
       </section>
 
-      {/* ══ OVERLAPPING-ICON FEATURE CARDS ══ */}
+      {/* ══ FEATURE CARDS ══ */}
       <section className="section-padding bg-white">
         <div className="container-wide">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-14 pt-10">
-            {featureCards.map((c, i) => {
-              const Icon = c.icon
-              return (
-                <motion.div
-                  key={c.title}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-20px' }}
-                  transition={{ duration: 0.4, delay: i * 0.08 }}
-                  className="relative"
-                >
-                  <div className="group relative bg-white rounded-2xl pt-12 px-7 pb-8 border border-slate-100
-                                  shadow-[0_4px_20px_rgba(15,30,92,0.06)] hover:shadow-[0_12px_40px_rgba(26,86,219,0.14)]
-                                  hover:-translate-y-1.5 transition-all duration-300 h-full">
-                    <div className="absolute -top-7 left-7 w-14 h-14 rounded-2xl
-                                    bg-gradient-to-br from-[#1A56DB] to-[#0F1E5C]
-                                    flex items-center justify-center
-                                    shadow-[0_8px_20px_rgba(26,86,219,0.35)]
-                                    group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300">
-                      <Icon className="w-6 h-6 text-white" strokeWidth={1.9} />
-                    </div>
-                    <h3 className="text-base font-bold text-[#0F1E5C] mb-2 tracking-[-0.02em]">{c.title}</h3>
-                    <p className="text-sm text-slate-500 leading-relaxed">{c.desc}</p>
-                  </div>
-                </motion.div>
-              )
-            })}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {featureCards.map((c, i) => (
+              <motion.div
+                key={c.title}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-20px' }}
+                transition={{ duration: 0.4, delay: i * 0.08 }}
+              >
+                <div className="group bg-white rounded-2xl p-7 border border-slate-100
+                                shadow-[0_4px_20px_rgba(15,30,92,0.06)] hover:shadow-[0_12px_40px_rgba(26,86,219,0.14)]
+                                hover:-translate-y-1.5 transition-all duration-300 h-full">
+                  <ServiceIconBadge name={c.icon} size={44} variant="naked"
+                    className="mb-5 group-hover:scale-110 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                  <h3 className="text-base font-bold text-[#0F1E5C] mb-2 tracking-[-0.02em]">{c.title}</h3>
+                  <p className="text-sm text-slate-500 leading-relaxed">{c.desc}</p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

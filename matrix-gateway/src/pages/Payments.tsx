@@ -1,25 +1,23 @@
 ﻿import { motion } from 'framer-motion'
-import {
-  ArrowRight, Layers, ShieldCheck, Zap, FileText,
-  RotateCcw, GitBranch, CreditCard, Wallet, CheckCircle2,
-} from 'lucide-react'
+import { ArrowRight, CheckCircle2 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import ScrollReveal from '../components/ScrollReveal'
+import ServiceIconBadge from '../components/ServiceIcon'
 
 /* "What We Provide the Best" — 2x2 feature cards */
 const provideCards = [
-  { icon: Layers, title: 'Countless Payment Options', desc: 'UPI, cards, net banking, wallets & more — all supported.' },
-  { icon: ShieldCheck, title: 'Security-Conscious Design', desc: 'Encrypted transactions and secure data handling at every step.' },
-  { icon: Zap, title: 'Quick Checkout', desc: 'Fast, frictionless checkout that keeps customers converting.' },
-  { icon: FileText, title: 'Invoice Payments', desc: 'Collect against invoices with a built-in payment link.' },
+  { icon: 'options', title: 'Countless Payment Options', desc: 'UPI, cards, net banking, wallets & more — all supported.' },
+  { icon: 'security', title: 'Security-Conscious Design', desc: 'Encrypted transactions and secure data handling at every step.' },
+  { icon: 'quick-checkout', title: 'Quick Checkout', desc: 'Fast, frictionless checkout that keeps customers converting.' },
+  { icon: 'invoice-pay', title: 'Invoice Payments', desc: 'Collect against invoices with a built-in payment link.' },
 ]
 
 /* "Getting Onboard" — 2x2 feature cards */
 const onboardCards = [
-  { icon: RotateCcw, title: 'Re-do Feature', desc: 'If a transaction fails, retry instantly without re-entering all details — saving time and effort.' },
-  { icon: GitBranch, title: 'Payout Links', desc: 'Multiple gateways ensure seamless transactions. If one path faces issues, payments route intelligently.' },
-  { icon: CreditCard, title: 'Multiple EMI', desc: 'Multi-bank credit card EMI lets merchants offer flexible payment and sell higher-value products.' },
-  { icon: Wallet, title: 'Payment Options', desc: 'A wide range of payment-processing solutions built to handle every business need.' },
+  { icon: 'redo', title: 'Re-do Feature', desc: 'If a transaction fails, retry instantly without re-entering all details — saving time and effort.' },
+  { icon: 'payout-links', title: 'Payout Links', desc: 'Multiple gateways ensure seamless transactions. If one path faces issues, payments route intelligently.' },
+  { icon: 'emi', title: 'Multiple EMI', desc: 'Multi-bank credit card EMI lets merchants offer flexible payment and sell higher-value products.' },
+  { icon: 'options', title: 'Payment Options', desc: 'A wide range of payment-processing solutions built to handle every business need.' },
 ]
 
 export default function Payments() {
@@ -145,9 +143,8 @@ export default function Payments() {
                   transition={{ duration: 0.4, delay: i * 0.08 }}
                   className="group bg-white rounded-2xl border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_rgba(26,86,219,0.12)] hover:-translate-y-1 transition-all duration-300 p-6 text-center flex flex-col items-center"
                 >
-                  <div className="w-16 h-16 rounded-full border-2 border-[#EFF6FF] bg-[#EFF6FF] flex items-center justify-center mb-4 group-hover:border-[#1A56DB]/20 group-hover:bg-[#1A56DB] transition-colors duration-300">
-                    <c.icon className="w-7 h-7 text-[#1A56DB] group-hover:text-white transition-colors duration-300" strokeWidth={1.7} />
-                  </div>
+                  <ServiceIconBadge name={c.icon} size={42} variant="naked"
+                    className="mb-4 group-hover:scale-110 group-hover:-translate-y-0.5 transition-transform duration-300" />
                   <h3 className="text-sm sm:text-base font-bold text-[#0F1E5C] tracking-[-0.02em] mb-1.5 leading-snug">{c.title}</h3>
                   <p className="text-xs text-slate-400 leading-relaxed">{c.desc}</p>
                 </motion.div>
@@ -182,9 +179,7 @@ export default function Payments() {
                   viewport={{ once: true, margin: '-20px' }}
                   transition={{ duration: 0.4, delay: i * 0.08 }}
                 >
-                  <div className="w-11 h-11 rounded-xl bg-white shadow-[0_2px_10px_rgba(26,86,219,0.12)] flex items-center justify-center mb-4">
-                    <c.icon className="w-5 h-5 text-[#1A56DB]" strokeWidth={1.8} />
-                  </div>
+                  <ServiceIconBadge name={c.icon} size={40} variant="naked" className="mb-4" />
                   <h3 className="text-base font-bold text-[#0F1E5C] tracking-[-0.02em] mb-1.5">{c.title}</h3>
                   <p className="text-sm text-slate-500 leading-relaxed">{c.desc}</p>
                 </motion.div>

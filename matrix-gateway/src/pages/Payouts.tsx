@@ -1,19 +1,17 @@
 ﻿import { motion } from 'framer-motion'
-import {
-  ArrowRight, CreditCard, TestTube2, Link2, Building2, ShoppingCart, Gamepad2,
-  CheckCircle2,
-} from 'lucide-react'
+import { ArrowRight, CheckCircle2 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import ScrollReveal from '../components/ScrollReveal'
+import ServiceIconBadge from '../components/ServiceIcon'
 
 /* Supercharge use-case cards */
 const useCases = [
-  { icon: CreditCard, title: 'Corporate Credit Cards', desc: 'Keep a tab on your expenses and manage funds effectively with corporate cards.' },
-  { icon: TestTube2, title: 'Penny Testing', desc: 'Validate bank account details by making small sample transactions before payouts.' },
-  { icon: Link2, title: 'Payout Links', desc: 'Send easy-to-create links to capture the necessary beneficiary account details.' },
-  { icon: Building2, title: 'Rental Business', desc: 'Automate rent collection and disbursements for property and rental businesses.' },
-  { icon: ShoppingCart, title: 'E-commerce', desc: 'Easily make vendor payments and disburse instant refunds to different customers.' },
-  { icon: Gamepad2, title: 'Online Gaming', desc: 'Instantly pay out cashbacks, winnings, and earnings directly to your users.' },
+  { icon: 'corporate-cards', title: 'Corporate Credit Cards', desc: 'Keep a tab on your expenses and manage funds effectively with corporate cards.' },
+  { icon: 'penny-testing', title: 'Penny Testing', desc: 'Validate bank account details by making small sample transactions before payouts.' },
+  { icon: 'payout-links', title: 'Payout Links', desc: 'Send easy-to-create links to capture the necessary beneficiary account details.' },
+  { icon: 'rental', title: 'Rental Business', desc: 'Automate rent collection and disbursements for property and rental businesses.' },
+  { icon: 'ecommerce', title: 'E-commerce', desc: 'Easily make vendor payments and disburse instant refunds to different customers.' },
+  { icon: 'gaming', title: 'Online Gaming', desc: 'Instantly pay out cashbacks, winnings, and earnings directly to your users.' },
 ]
 
 export default function Payouts() {
@@ -183,9 +181,8 @@ export default function Payouts() {
                   transition={{ duration: 0.4, delay: i * 0.06 }}
                   className="group bg-white rounded-2xl border border-white shadow-[0_2px_12px_rgba(15,30,92,0.05)] hover:shadow-[0_8px_28px_rgba(26,86,219,0.1)] hover:-translate-y-1 transition-all duration-300 p-6"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-[#EFF6FF] flex items-center justify-center mb-4 group-hover:bg-[#1A56DB] transition-colors duration-300">
-                    <uc.icon className="w-6 h-6 text-[#1A56DB] group-hover:text-white transition-colors duration-300" strokeWidth={1.7} />
-                  </div>
+                  <ServiceIconBadge name={uc.icon} size={42} variant="naked"
+                    className="mb-4 group-hover:scale-110 group-hover:-translate-y-0.5 transition-transform duration-300" />
                   <h3 className="text-base font-bold text-[#0F1E5C] tracking-[-0.02em] mb-1.5">{uc.title}</h3>
                   <p className="text-sm text-slate-500 leading-relaxed">{uc.desc}</p>
                 </motion.div>

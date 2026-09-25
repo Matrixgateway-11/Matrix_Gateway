@@ -1,26 +1,24 @@
 ﻿import { motion } from 'framer-motion'
-import {
-  ArrowRight, Home, CreditCard, Smartphone, CheckCircle2,
-  HandCoins, BarChart3, Settings2, ToggleRight, Code2, LayoutDashboard,
-} from 'lucide-react'
+import { ArrowRight, CheckCircle2 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import ScrollReveal from '../components/ScrollReveal'
+import ServiceIconBadge from '../components/ServiceIcon'
 
 /* Three easy steps */
 const steps = [
-  { icon: Home, title: 'Generate a Payment Link', desc: 'Create it via API or dashboard, along with free reminders.' },
-  { icon: CreditCard, title: 'Enter Customer Details', desc: 'Then share the link via SMS, WhatsApp, email, and more.' },
-  { icon: Smartphone, title: 'Accept Payments', desc: 'Receive notifications in real time as payments come in.' },
+  { icon: 'payment-links', title: 'Generate a Payment Link', desc: 'Create it via API or dashboard, along with free reminders.' },
+  { icon: 'corporate-cards', title: 'Enter Customer Details', desc: 'Then share the link via SMS, WhatsApp, email, and more.' },
+  { icon: 'mobile', title: 'Accept Payments', desc: 'Receive notifications in real time as payments come in.' },
 ]
 
 /* Accept payments instantly — 6 feature grid */
 const instantFeatures = [
-  { icon: HandCoins, title: 'Request Bulk Payment', desc: 'Send payment requests to many customers at once.' },
-  { icon: BarChart3, title: 'Track Sales on Links', desc: 'Monitor which links convert and when they get paid.' },
-  { icon: Settings2, title: 'Customize Links', desc: 'Set amounts, expiry, descriptions, and branding.' },
-  { icon: ToggleRight, title: 'Switch On / Off Links', desc: 'Activate or deactivate any link instantly.' },
-  { icon: Code2, title: 'Embed Payment Links', desc: 'Drop links into your site, emails, or messages.' },
-  { icon: LayoutDashboard, title: 'Manage from Dashboard', desc: 'Full control over every link in one place.' },
+  { icon: 'revenue', title: 'Request Bulk Payment', desc: 'Send payment requests to many customers at once.' },
+  { icon: 'track-payments', title: 'Track Sales on Links', desc: 'Monitor which links convert and when they get paid.' },
+  { icon: 'custom-fields', title: 'Customize Links', desc: 'Set amounts, expiry, descriptions, and branding.' },
+  { icon: 'interoperable', title: 'Switch On / Off Links', desc: 'Activate or deactivate any link instantly.' },
+  { icon: 'no-code', title: 'Embed Payment Links', desc: 'Drop links into your site, emails, or messages.' },
+  { icon: 'reporting', title: 'Manage from Dashboard', desc: 'Full control over every link in one place.' },
 ]
 
 export default function PaymentLinks() {
@@ -157,9 +155,7 @@ export default function PaymentLinks() {
                   transition={{ duration: 0.4, delay: i * 0.1 }}
                   className="flex gap-4"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-[#EFF6FF] flex items-center justify-center flex-shrink-0">
-                    <s.icon className="w-5 h-5 text-[#1A56DB]" strokeWidth={1.8} />
-                  </div>
+                  <ServiceIconBadge name={s.icon} size={38} variant="naked" className="flex-shrink-0 mt-0.5" />
                   <div>
                     <h3 className="text-base font-bold text-[#1A56DB] tracking-[-0.02em] mb-1">{s.title}</h3>
                     <p className="text-sm text-slate-500 leading-relaxed">{s.desc}</p>
@@ -200,9 +196,8 @@ export default function PaymentLinks() {
                 transition={{ duration: 0.4, delay: i * 0.06 }}
                 className="group flex flex-col items-center text-center bg-white rounded-2xl border border-slate-100 shadow-[0_2px_12px_rgba(15,30,92,0.05)] hover:shadow-[0_8px_30px_rgba(26,86,219,0.1)] hover:-translate-y-1 transition-all duration-300 p-7"
               >
-                <div className="w-14 h-14 rounded-full bg-[#EFF6FF] flex items-center justify-center mb-4 group-hover:bg-[#1A56DB] transition-colors duration-300">
-                  <f.icon className="w-6 h-6 text-[#1A56DB] group-hover:text-white transition-colors duration-300" strokeWidth={1.7} />
-                </div>
+                <ServiceIconBadge name={f.icon} size={40} variant="naked"
+                  className="mb-4 group-hover:scale-110 group-hover:-translate-y-0.5 transition-transform duration-300" />
                 <h3 className="text-sm font-bold text-[#0F1E5C] tracking-[-0.02em] mb-1.5">{f.title}</h3>
                 <p className="text-xs text-slate-400 leading-relaxed">{f.desc}</p>
               </motion.div>

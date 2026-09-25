@@ -1,25 +1,26 @@
 ﻿import { motion } from 'framer-motion'
-import { ArrowRight, ShieldCheck, RefreshCw, BadgeCheck } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import ScrollReveal from '../components/ScrollReveal'
+import ServiceIconBadge from '../components/ServiceIcon'
 
 /* checklist highlights */
 const highlights = ['Fast', 'Secure', 'Simple', 'Interoperable']
 
-/* overlapping-icon feature cards */
+/* feature cards */
 const featureCards = [
   {
-    icon: BadgeCheck,
+    icon: 'no-charge',
     title: 'No Hidden Charges',
     desc: 'No extra charges when customers pay through the wallet. Everything is simple, transparent, and easy to understand.',
   },
   {
-    icon: ShieldCheck,
+    icon: 'security',
     title: 'Secure',
     desc: 'Wallet payments are as safe as paying through UPI. Card and account details stay protected with no third-party interference.',
   },
   {
-    icon: RefreshCw,
+    icon: 'interoperable',
     title: 'Interoperable',
     desc: 'Works across popular QR and UPI apps — pay using cards or UPI seamlessly from a single balance.',
   },
@@ -144,36 +145,26 @@ export default function Wallets() {
             </ScrollReveal>
           </div>
 
-          {/* Overlapping-icon feature cards */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-14 pt-16">
-            {featureCards.map((c, i) => {
-              const Icon = c.icon
-              return (
-                <motion.div
-                  key={c.title}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-20px' }}
-                  transition={{ duration: 0.4, delay: i * 0.08 }}
-                  className="relative"
-                >
-                  <div className="group relative bg-white rounded-2xl pt-12 px-7 pb-8 border border-slate-100
-                                  shadow-[0_4px_20px_rgba(15,30,92,0.06)] hover:shadow-[0_12px_40px_rgba(26,86,219,0.14)]
-                                  hover:-translate-y-1.5 transition-all duration-300 h-full">
-                    {/* floating overlapping icon */}
-                    <div className="absolute -top-7 left-7 w-14 h-14 rounded-2xl
-                                    bg-gradient-to-br from-[#1A56DB] to-[#0F1E5C]
-                                    flex items-center justify-center
-                                    shadow-[0_8px_20px_rgba(26,86,219,0.35)]
-                                    group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300">
-                      <Icon className="w-6 h-6 text-white" strokeWidth={1.9} />
-                    </div>
-                    <h3 className="text-base font-bold text-[#0F1E5C] mb-2 tracking-[-0.02em]">{c.title}</h3>
-                    <p className="text-sm text-slate-500 leading-relaxed">{c.desc}</p>
-                  </div>
-                </motion.div>
-              )
-            })}
+          {/* Feature cards — naked duotone icons */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 pt-14">
+            {featureCards.map((c, i) => (
+              <motion.div
+                key={c.title}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-20px' }}
+                transition={{ duration: 0.4, delay: i * 0.08 }}
+              >
+                <div className="group bg-white rounded-2xl p-7 border border-slate-100
+                                shadow-[0_4px_20px_rgba(15,30,92,0.06)] hover:shadow-[0_12px_40px_rgba(26,86,219,0.14)]
+                                hover:-translate-y-1.5 transition-all duration-300 h-full">
+                  <ServiceIconBadge name={c.icon} size={44} variant="naked"
+                    className="mb-5 group-hover:scale-110 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                  <h3 className="text-base font-bold text-[#0F1E5C] mb-2 tracking-[-0.02em]">{c.title}</h3>
+                  <p className="text-sm text-slate-500 leading-relaxed">{c.desc}</p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

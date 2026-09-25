@@ -1,19 +1,17 @@
 ﻿import { motion } from 'framer-motion'
-import {
-  ArrowRight, MonitorSmartphone, Layers, ShieldCheck, ListChecks,
-  Globe, CalendarClock, Landmark, Handshake,
-} from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import ScrollReveal from '../components/ScrollReveal'
+import ServiceIconBadge from '../components/ServiceIcon'
 
 /* Checkout feature grid */
 const checkoutFeatures = [
-  { icon: MonitorSmartphone, title: 'Matrix Gateway Platform', desc: 'A wide, assorted set of solutions for payment-processing transactions — integrated with major banks and payment methods.', highlight: false },
-  { icon: Layers, title: 'Countless Payment Options', desc: 'Payment options are key to retaining customers. Accept cards, net banking, wallets, UPI, QR, NEFT/RTGS, and more.', highlight: true },
-  { icon: ShieldCheck, title: 'Security-Conscious Encryption', desc: 'Online security backed by encryption and secure data handling — a high level of protection for every transaction.', highlight: true },
-  { icon: ListChecks, title: 'Retry Option', desc: 'Offer customers the luxury of all payment modes — Credit/Debit cards, Net Banking, UPI, Wallets, and more.', highlight: false },
-  { icon: Globe, title: 'Quick Checkout', desc: 'Customers can securely save card details, so subsequent transactions complete with just the CVV — easy and fast.', highlight: false },
-  { icon: CalendarClock, title: 'Re-do Feature', desc: 'If a transaction fails, resume from where you left off instead of re-entering all details — saving time and effort.', highlight: false },
+  { icon: 'gateway-platform', title: 'Matrix Gateway Platform', desc: 'A wide, assorted set of solutions for payment-processing transactions — integrated with major banks and payment methods.', highlight: false },
+  { icon: 'options', title: 'Countless Payment Options', desc: 'Payment options are key to retaining customers. Accept cards, net banking, wallets, UPI, QR, NEFT/RTGS, and more.', highlight: true },
+  { icon: 'security', title: 'Security-Conscious Encryption', desc: 'Online security backed by encryption and secure data handling — a high level of protection for every transaction.', highlight: true },
+  { icon: 'retry', title: 'Retry Option', desc: 'Offer customers the luxury of all payment modes — Credit/Debit cards, Net Banking, UPI, Wallets, and more.', highlight: false },
+  { icon: 'quick-checkout', title: 'Quick Checkout', desc: 'Customers can securely save card details, so subsequent transactions complete with just the CVV — easy and fast.', highlight: false },
+  { icon: 'redo', title: 'Re-do Feature', desc: 'If a transaction fails, resume from where you left off instead of re-entering all details — saving time and effort.', highlight: false },
 ]
 
 export default function PaymentGateway() {
@@ -99,31 +97,25 @@ export default function PaymentGateway() {
 
           {/* Feature grid */}
           <div className="grid sm:grid-cols-2 gap-5">
-            {checkoutFeatures.map((f, i) => {
-              const Icon = f.icon
-              return (
-                <motion.div
-                  key={f.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-20px' }}
-                  transition={{ duration: 0.4, delay: i * 0.06 }}
-                  className={`flex gap-4 rounded-2xl p-6 border transition-all duration-300 hover:-translate-y-1
-                    ${f.highlight
-                      ? 'bg-white border-[#1A56DB]/20 shadow-[0_8px_30px_rgba(26,86,219,0.12)]'
-                      : 'bg-white border-slate-100 shadow-[0_2px_12px_rgba(15,30,92,0.05)] hover:shadow-[0_8px_30px_rgba(26,86,219,0.1)]'}`}
-                >
-                  <div className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0
-                    ${f.highlight ? 'bg-[#1A56DB]' : 'bg-[#EFF6FF]'}`}>
-                    <Icon className={`w-5 h-5 ${f.highlight ? 'text-white' : 'text-[#1A56DB]'}`} strokeWidth={1.8} />
-                  </div>
-                  <div>
-                    <h3 className="text-base font-bold text-[#0F1E5C] tracking-[-0.02em] mb-1.5">{f.title}</h3>
-                    <p className="text-sm text-slate-500 leading-relaxed">{f.desc}</p>
-                  </div>
-                </motion.div>
-              )
-            })}
+            {checkoutFeatures.map((f, i) => (
+              <motion.div
+                key={f.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-20px' }}
+                transition={{ duration: 0.4, delay: i * 0.06 }}
+                className={`flex gap-4 rounded-2xl p-6 border transition-all duration-300 hover:-translate-y-1
+                  ${f.highlight
+                    ? 'bg-white border-[#1A56DB]/20 shadow-[0_8px_30px_rgba(26,86,219,0.12)]'
+                    : 'bg-white border-slate-100 shadow-[0_2px_12px_rgba(15,30,92,0.05)] hover:shadow-[0_8px_30px_rgba(26,86,219,0.1)]'}`}
+              >
+                <ServiceIconBadge name={f.icon} size={36} variant="naked" className="flex-shrink-0 mt-0.5" />
+                <div>
+                  <h3 className="text-base font-bold text-[#0F1E5C] tracking-[-0.02em] mb-1.5">{f.title}</h3>
+                  <p className="text-sm text-slate-500 leading-relaxed">{f.desc}</p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -146,8 +138,8 @@ export default function PaymentGateway() {
 
           <div className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
             {[
-              { icon: Landmark, title: 'Collection', desc: 'A customer purchases a product from your website and taps "Pay Now" — redirecting them to the secure online payment gateway.' },
-              { icon: Handshake, title: 'Settlement', desc: 'The collected amount is settled and credited to your account, typically within the next business day.' },
+              { icon: 'collection', title: 'Collection', desc: 'A customer purchases a product from your website and taps "Pay Now" — redirecting them to the secure online payment gateway.' },
+              { icon: 'settlement', title: 'Settlement', desc: 'The collected amount is settled and credited to your account, typically within the next business day.' },
             ].map((s, i) => (
               <motion.div
                 key={s.title}
@@ -157,9 +149,7 @@ export default function PaymentGateway() {
                 transition={{ duration: 0.4, delay: i * 0.1 }}
                 className="bg-white rounded-2xl border border-slate-100 shadow-[0_2px_12px_rgba(15,30,92,0.05)] p-7"
               >
-                <div className="w-12 h-12 rounded-xl bg-[#EFF6FF] flex items-center justify-center mb-4">
-                  <s.icon className="w-6 h-6 text-[#1A56DB]" strokeWidth={1.7} />
-                </div>
+                <ServiceIconBadge name={s.icon} size={42} variant="naked" className="mb-4" />
                 <h3 className="text-lg font-bold text-[#0F1E5C] tracking-[-0.02em] mb-2">{s.title}</h3>
                 <p className="text-sm text-slate-500 leading-relaxed">{s.desc}</p>
               </motion.div>

@@ -1,35 +1,32 @@
 ﻿import { motion } from 'framer-motion'
-import {
-  ArrowRight, Briefcase, Boxes, Coins, Ticket,
-  Download, KeyRound, ThumbsUp,
-  Search, Route as RouteIcon, Palette, Link2, Rocket, Code2,
-} from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import ScrollReveal from '../components/ScrollReveal'
+import ServiceIconBadge from '../components/ServiceIcon'
 
 /* Section 2 — boost your business */
 const boostFeatures = [
-  { icon: Briefcase, title: 'Free Collection', desc: 'Collect fees and accept payments in seconds with our hosted form — no paperwork involved.' },
-  { icon: Boxes, title: 'Sell Products', desc: 'Selling products online? Take orders around the clock with our online order template.' },
-  { icon: Coins, title: 'Accept Donations', desc: 'Raising money for a good cause? Our hosted donations page saves you valuable time.' },
-  { icon: Ticket, title: 'Events & Tickets', desc: 'Get quick online registration of attendees for your events with ready-to-use pages.' },
+  { icon: 'free-collection', title: 'Free Collection', desc: 'Collect fees and accept payments in seconds with our hosted form — no paperwork involved.' },
+  { icon: 'sell-products', title: 'Sell Products', desc: 'Selling products online? Take orders around the clock with our online order template.' },
+  { icon: 'donations', title: 'Accept Donations', desc: 'Raising money for a good cause? Our hosted donations page saves you valuable time.' },
+  { icon: 'events', title: 'Events & Tickets', desc: 'Get quick online registration of attendees for your events with ready-to-use pages.' },
 ]
 
 /* Section 3 — new levels */
 const levelFeatures = [
-  { icon: Download, title: 'Listings for Multiple Products', desc: 'Easily add the products or services you plan to sell and their images on a single payment page.' },
-  { icon: KeyRound, title: 'Efficient Purchase Control', desc: 'Control minimum and maximum quantities and amounts your customers can buy — full control over your sales.' },
-  { icon: ThumbsUp, title: 'Intuitive Reporting', desc: 'Efficiency in every dimension — track successful and failed payments with clear, actionable reports.' },
+  { icon: 'listings', title: 'Listings for Multiple Products', desc: 'Easily add the products or services you plan to sell and their images on a single payment page.' },
+  { icon: 'purchase-control', title: 'Efficient Purchase Control', desc: 'Control minimum and maximum quantities and amounts your customers can buy — full control over your sales.' },
+  { icon: 'reporting', title: 'Intuitive Reporting', desc: 'Efficiency in every dimension — track successful and failed payments with clear, actionable reports.' },
 ]
 
 /* Section 4 — online payment feature grid */
 const onlineFeatures = [
-  { icon: Search, title: 'Track Payments', desc: 'Dashboard reports help you make informed decisions with real-time payment data.' },
-  { icon: RouteIcon, title: 'Custom Fields', desc: 'Modify your payment page fields to collect the information that matters to your business.' },
-  { icon: Palette, title: 'Custom Branded', desc: 'Customize the look and feel with your brand colours for a flawless customer experience.' },
-  { icon: Link2, title: 'Memorable URLs', desc: 'Stand out with your own custom URL for easy recognition of your business.' },
-  { icon: Rocket, title: 'Get Online Fast', desc: 'Look professional with a custom URL that is easy to share and an extension of your brand.' },
-  { icon: Code2, title: 'No Coding Required', desc: 'Create and publish beautiful payment pages without writing a single line of code.' },
+  { icon: 'track-payments', title: 'Track Payments', desc: 'Dashboard reports help you make informed decisions with real-time payment data.' },
+  { icon: 'custom-fields', title: 'Custom Fields', desc: 'Modify your payment page fields to collect the information that matters to your business.' },
+  { icon: 'custom-branded', title: 'Custom Branded', desc: 'Customize the look and feel with your brand colours for a flawless customer experience.' },
+  { icon: 'memorable-urls', title: 'Memorable URLs', desc: 'Stand out with your own custom URL for easy recognition of your business.' },
+  { icon: 'get-online', title: 'Get Online Fast', desc: 'Look professional with a custom URL that is easy to share and an extension of your brand.' },
+  { icon: 'no-code', title: 'No Coding Required', desc: 'Create and publish beautiful payment pages without writing a single line of code.' },
 ]
 
 export default function PaymentPages() {
@@ -118,9 +115,7 @@ export default function PaymentPages() {
               <div className="grid sm:grid-cols-2 gap-x-8 gap-y-8">
                 {boostFeatures.map((f) => (
                   <div key={f.title}>
-                    <div className="w-11 h-11 rounded-xl bg-[#EFF6FF] flex items-center justify-center mb-3">
-                      <f.icon className="w-5 h-5 text-[#1A56DB]" strokeWidth={1.8} />
-                    </div>
+                    <ServiceIconBadge name={f.icon} size={40} variant="naked" className="mb-3" />
                     <h3 className="text-base font-bold text-[#0F1E5C] tracking-[-0.02em] mb-1.5">{f.title}</h3>
                     <p className="text-sm text-slate-500 leading-relaxed">{f.desc}</p>
                   </div>
@@ -162,9 +157,7 @@ export default function PaymentPages() {
               <div className="space-y-6">
                 {levelFeatures.map((f) => (
                   <div key={f.title} className="flex gap-4">
-                    <div className="w-11 h-11 rounded-xl bg-white shadow-[0_2px_10px_rgba(26,86,219,0.12)] flex items-center justify-center flex-shrink-0">
-                      <f.icon className="w-5 h-5 text-[#1A56DB]" strokeWidth={1.8} />
-                    </div>
+                    <ServiceIconBadge name={f.icon} size={34} variant="naked" className="flex-shrink-0 mt-0.5" />
                     <div>
                       <h3 className="text-base font-bold text-[#1A56DB] tracking-[-0.02em] mb-1">{f.title}</h3>
                       <p className="text-sm text-slate-500 leading-relaxed">{f.desc}</p>
@@ -204,9 +197,7 @@ export default function PaymentPages() {
                   transition={{ duration: 0.4, delay: i * 0.06 }}
                   className="flex gap-4 bg-white rounded-2xl border border-white shadow-[0_2px_12px_rgba(15,30,92,0.05)] hover:shadow-[0_8px_28px_rgba(26,86,219,0.1)] transition-all duration-300 p-6"
                 >
-                  <div className="w-11 h-11 rounded-xl bg-[#EFF6FF] flex items-center justify-center flex-shrink-0">
-                    <f.icon className="w-5 h-5 text-[#1A56DB]" strokeWidth={1.8} />
-                  </div>
+                  <ServiceIconBadge name={f.icon} size={34} variant="naked" className="flex-shrink-0 mt-0.5" />
                   <div>
                     <h3 className="text-base font-bold text-[#0F1E5C] tracking-[-0.02em] mb-1.5">{f.title}</h3>
                     <p className="text-sm text-slate-500 leading-relaxed">{f.desc}</p>

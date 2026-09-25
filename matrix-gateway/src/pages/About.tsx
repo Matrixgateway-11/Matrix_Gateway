@@ -1,11 +1,10 @@
 ﻿import { motion } from 'framer-motion'
-import {
-  ArrowRight, Lightbulb, RefreshCw, ShieldCheck, Zap, Code2,
-  CheckCircle2, Target,
-} from 'lucide-react'
+import { ArrowRight, CheckCircle2 } from 'lucide-react'
+import { Lightbulb, Target } from '@phosphor-icons/react'
 import { Link } from 'react-router-dom'
 import CTASection from '../components/CTASection'
 import ScrollReveal from '../components/ScrollReveal'
+import ServiceIconBadge from '../components/ServiceIcon'
 
 /* Reusable eyebrow label */
 function Eyebrow({ children, light = false }: { children: React.ReactNode; light?: boolean }) {
@@ -196,9 +195,7 @@ export default function About() {
 
               {/* Vision */}
               <div className="flex gap-5 mb-6">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#1A56DB] to-[#0F1E5C] flex items-center justify-center flex-shrink-0 shadow-md">
-                  <Lightbulb className="w-6 h-6 text-white" strokeWidth={1.8} />
-                </div>
+                <Lightbulb size={40} weight="duotone" className="text-[#1A56DB] flex-shrink-0 mt-0.5" />
                 <div>
                   <h3 className="text-lg font-extrabold text-[#0F1E5C] tracking-[-0.03em] mb-1.5">Our Vision</h3>
                   <p className="text-sm text-slate-500 leading-relaxed">
@@ -210,9 +207,7 @@ export default function About() {
 
               {/* Mission */}
               <div className="flex gap-5">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#1A56DB] to-[#0F1E5C] flex items-center justify-center flex-shrink-0 shadow-md">
-                  <Target className="w-6 h-6 text-white" strokeWidth={1.8} />
-                </div>
+                <Target size={40} weight="duotone" className="text-[#1A56DB] flex-shrink-0 mt-0.5" />
                 <div>
                   <h3 className="text-lg font-extrabold text-[#0F1E5C] tracking-[-0.03em] mb-1.5">Our Mission</h3>
                   <p className="text-sm text-slate-500 leading-relaxed">
@@ -316,10 +311,10 @@ export default function About() {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
-              { icon: ShieldCheck, title: 'Security First', desc: 'Payment workflows built with security-conscious practices at every layer.' },
-              { icon: Zap, title: 'Speed & Reliability', desc: 'Payments should work every time, instantly. Reliability is non-negotiable.' },
-              { icon: Code2, title: 'Developer Experience', desc: 'Clean APIs and tools that developers genuinely enjoy working with.' },
-              { icon: RefreshCw, title: 'Continuous Innovation', desc: 'We evolve constantly to meet the changing needs of Indian businesses.' },
+              { icon: 'security', title: 'Security First', desc: 'Payment workflows built with security-conscious practices at every layer.' },
+              { icon: 'speed', title: 'Speed & Reliability', desc: 'Payments should work every time, instantly. Reliability is non-negotiable.' },
+              { icon: 'developers', title: 'Developer Experience', desc: 'Clean APIs and tools that developers genuinely enjoy working with.' },
+              { icon: 'interoperable', title: 'Continuous Innovation', desc: 'We evolve constantly to meet the changing needs of Indian businesses.' },
             ].map((v, i) => (
               <motion.div
                 key={v.title}
@@ -329,9 +324,7 @@ export default function About() {
                 transition={{ duration: 0.4, delay: i * 0.08 }}
                 className="p-6 bg-white rounded-2xl border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.05)] hover:shadow-[0_6px_30px_rgba(26,86,219,0.1)] hover:-translate-y-1 transition-all duration-300"
               >
-                <div className="w-12 h-12 bg-[#EFF6FF] rounded-xl flex items-center justify-center mb-4">
-                  <v.icon className="w-6 h-6 text-[#1A56DB]" strokeWidth={1.8} />
-                </div>
+                <ServiceIconBadge name={v.icon} size={42} variant="naked" className="mb-4" />
                 <h3 className="font-bold text-[#0F1E5C] mb-2 tracking-[-0.02em]">{v.title}</h3>
                 <p className="text-sm text-slate-500 leading-relaxed">{v.desc}</p>
               </motion.div>

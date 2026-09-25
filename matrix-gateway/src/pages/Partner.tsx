@@ -1,8 +1,9 @@
 ﻿import { motion } from 'framer-motion'
-import { TrendingUp, DollarSign, Shield, Zap } from 'lucide-react'
+import { Shield, Lightning, CurrencyInr } from '@phosphor-icons/react'
 import SectionHeader from '../components/SectionHeader'
 import CTASection from '../components/CTASection'
 import ScrollReveal from '../components/ScrollReveal'
+import ServiceIconBadge from '../components/ServiceIcon'
 
 /* ── Financial institution logos ──
    Add PNG files to public/images/logos/ using these exact filenames.
@@ -206,11 +207,11 @@ export default function Partner() {
               >
                 {[
                   { icon: Shield, label: '140+ Institutions' },
-                  { icon: Zap, label: 'Secure Integrations' },
-                  { icon: DollarSign, label: 'Revenue Sharing' },
+                  { icon: Lightning, label: 'Secure Integrations' },
+                  { icon: CurrencyInr, label: 'Revenue Sharing' },
                 ].map(({ icon: Icon, label }) => (
                   <div key={label} className="inline-flex items-center gap-1.5 bg-white border border-slate-100 shadow-[0_1px_4px_rgba(0,0,0,0.04)] rounded-lg px-3 py-2">
-                    <Icon className="w-3.5 h-3.5 text-[#1A56DB]" strokeWidth={2} />
+                    <Icon size={15} weight="duotone" className="text-[#1A56DB]" />
                     <span className="text-xs font-semibold text-slate-700">{label}</span>
                   </div>
                 ))}
@@ -286,16 +287,14 @@ export default function Partner() {
           <SectionHeader label="Partner Benefits" title="Why Partner with Matrix Gateway?" />
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-12">
             {[
-              { icon: DollarSign, title: 'Revenue Sharing', desc: 'Competitive revenue sharing model with transparent payouts.' },
-              { icon: TrendingUp, title: 'Growth Support', desc: 'Marketing materials, co-selling resources, and go-to-market support.' },
-              { icon: Zap, title: 'Fast Integration', desc: 'Well-documented APIs and SDKs to get up and running quickly.' },
-              { icon: Shield, title: 'Reliable Platform', desc: 'High-uptime infrastructure that you can confidently offer to your customers.' },
+              { icon: 'revenue', title: 'Revenue Sharing', desc: 'Competitive revenue sharing model with transparent payouts.' },
+              { icon: 'growth', title: 'Growth Support', desc: 'Marketing materials, co-selling resources, and go-to-market support.' },
+              { icon: 'fast-integration', title: 'Fast Integration', desc: 'Well-documented APIs and SDKs to get up and running quickly.' },
+              { icon: 'reliable', title: 'Reliable Platform', desc: 'High-uptime infrastructure that you can confidently offer to your customers.' },
             ].map((b, i) => (
               <ScrollReveal key={b.title} delay={i * 0.1}>
-                <div className="p-6 bg-white rounded-2xl border border-slate-100 shadow-[0_1px_4px_rgba(0,0,0,0.06),0_4px_16px_rgba(0,0,0,0.04)] text-center">
-                  <div className="w-12 h-12 bg-[#EFF6FF] rounded-xl flex items-center justify-center mx-auto mb-4">
-                    <b.icon className="w-6 h-6 text-[#1A56DB]" />
-                  </div>
+                <div className="p-6 bg-white rounded-2xl border border-slate-100 shadow-[0_1px_4px_rgba(0,0,0,0.06),0_4px_16px_rgba(0,0,0,0.04)] text-center flex flex-col items-center">
+                  <ServiceIconBadge name={b.icon} size={42} variant="naked" className="mb-4" />
                   <h3 className="font-bold text-[#0F1E5C] mb-2">{b.title}</h3>
                   <p className="text-sm text-slate-500 leading-relaxed">{b.desc}</p>
                 </div>
